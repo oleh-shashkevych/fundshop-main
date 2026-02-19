@@ -1,0 +1,675 @@
+/* =========================================
+   Custom Properties (Variables)
+   ========================================= */
+:root {
+    /* Типографика */
+    --font-main: 'Poppins', sans-serif;
+
+    /* Цветовая палитра из макета */
+    --color-white: #FFFFFF;
+    --color-bg-light: #FAFAFA;
+    --color-text-main: #161618;
+    --color-text-muted: rgba(22, 22, 24, 0.6);
+    --color-border: #C3C3C4;
+    --color-border-light: #D2D2D2;
+
+    --color-accent: #159C2A;
+    --color-accent-hover: #1FBE38;
+
+    --color-search-bg: rgba(22, 22, 24, 0.7);
+    --color-search-bg-hover: rgba(22, 22, 24, 0.9);
+}
+
+/* =========================================
+   Reset & Normalize
+   ========================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Плавный скролл к якорным ссылкам */
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-main);
+    background-color: var(--color-white);
+    line-height: 1.5;
+    /* Базовый межстрочный интервал. В макете часто 100%, это будем задавать элементам точечно */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Отступ сверху, чтобы контент не прятался под фиксированным хедером. 
+     Значение нужно будет подогнать под финальную высоту твоего хедера (примерно 140px на ПК) */
+    padding-top: 140px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Медиа делают изображения адаптивными по умолчанию */
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   Global Utilities
+   ========================================= */
+
+/* Класс для скрытия элементов визуально, но оставляя их доступными для скринридеров (полезно для a11y) */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+/* Базовый контейнер. В ТЗ указано 1920px для основного контента, 
+   но для хедера ты давал 1596px. Будем использовать модификаторы по необходимости */
+.container {
+    max-width: 1968px;
+    /* 1920px + 24px + 24px padding */
+    padding: 0 24px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+
+    /* Корректировка отступа под мобильный хедер */
+    body {
+        padding-top: 80px;
+    }
+}
+
+/* Базовые стили хедера */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FAFAFA;
+    z-index: 100;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Легкая тень для отделения от контента при скролле */
+}
+
+.header__container {
+    max-width: 1644px;
+    /* 1596 + 24*2 padding */
+    padding: 0 24px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* === Верхняя часть (PC) === */
+.header__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+}
+
+.header__top-left {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+}
+
+.header__logo {
+    max-width: 270px;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.header__logo:hover {
+    opacity: 0.8;
+}
+
+.header__logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.header__partners {
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    gap: 42px;
+    height: 37px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.header__partners img {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.header__top-right {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.header__top-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.header__top-link {
+    padding: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: #000;
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.header__top-link:hover {
+    opacity: 1;
+    color: #159C2A;
+    /* Легкий акцент при ховере */
+}
+
+.header__search {
+    display: flex;
+}
+
+.header__search-input {
+    width: 100%;
+    max-width: 205px;
+    height: 50px;
+    border: 1px solid #C3C3C4;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    background: #FFFFFF;
+    padding: 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #161618;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.header__search-input::placeholder {
+    color: #999;
+}
+
+.header__search-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(22, 22, 24, 0.7);
+    /* #16161870 */
+    border-radius: 0 8px 8px 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.header__search-btn:hover {
+    background: rgba(22, 22, 24, 0.9);
+}
+
+.header__burger {
+    display: none;
+    /* Скрыт на ПК */
+}
+
+/* === Нижняя часть (PC) === */
+.header__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    /* Отступ снизу для баланса */
+}
+
+.header__bottom-nav {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.header__bottom-link {
+    padding: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: #161618;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s ease;
+}
+
+.header__bottom-link:hover {
+    color: #159C2A;
+}
+
+/* Выпадающее меню */
+.has-dropdown {
+    position: relative;
+}
+
+.header__dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    min-width: 200px;
+    border-radius: 4px;
+}
+
+.header__dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: #161618;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header__dropdown a:hover {
+    background: #FAFAFA;
+    color: #159C2A;
+}
+
+.has-dropdown:hover .header__dropdown {
+    display: block;
+}
+
+.header__contacts {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.header__phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    /* Оставим смену прозрачности для визуального отклика, раз убрали подъем */
+    transition: opacity 0.3s ease;
+}
+
+.header__phone:hover {
+    opacity: 0.8;
+}
+
+.header__phone-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__phone-number {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: #161618;
+    text-transform: uppercase;
+}
+
+.header__phone-desc {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1;
+    color: #161618;
+    opacity: 0.8;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.header__btn {
+    height: 50px;
+    background: #159C2A;
+    border-radius: 8px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #FAFAFA;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    /* Оставили только плавную смену фона */
+    box-sizing: border-box;
+}
+
+.header__btn:hover {
+    background: #1FBE38;
+}
+
+/* =========================================
+   Адаптив: Планшет (до 1200px) 
+   ========================================= */
+@media (max-width: 1200px) {
+    .header__container {
+        max-width: 864px;
+    }
+
+    /* Верхняя часть планшет */
+    .header__top-left {
+        gap: 24px;
+    }
+
+    .header__logo {
+        max-width: 160px;
+    }
+
+    .header__partners {
+        gap: 18px;
+        height: 27px;
+    }
+
+    .header__top-nav {
+        display: none;
+        /* Скрываем верхнее меню навигации */
+    }
+
+    .header__top-right {
+        gap: 24px;
+    }
+
+    .header__search-input {
+        max-width: 176px;
+        height: 39px;
+    }
+
+    .header__search-btn {
+        width: 39px;
+        height: 39px;
+    }
+
+    .header__search-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Бургер меню */
+    .header__burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        width: 39px;
+        height: 39px;
+        border: 1px solid #D2D2D2;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .header__burger:hover {
+        background: #f0f0f0;
+    }
+
+    .header__burger span {
+        width: 17px;
+        height: 2px;
+        background: #161618;
+        border-radius: 2px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    /* Нижняя часть планшет */
+    .header__bottom-nav {
+        gap: 17px;
+    }
+
+    .header__bottom-link {
+        font-size: 14px;
+        /* Немного уменьшаем шрифт для вместительности */
+    }
+
+    .header__phone {
+        display: none;
+        /* Скрываем телефон на планшете */
+    }
+}
+
+/* =========================================
+   Адаптив: Мобильные (до 767px) 
+   ========================================= */
+@media (max-width: 767px) {
+    .header__container {
+        padding: 0 24px;
+    }
+
+    .header__top {
+        padding: 14px 0;
+    }
+
+    .header__partners,
+    .header__search {
+        display: none;
+        /* Скрываем партнеров и поиск */
+    }
+
+    .header__bottom {
+        display: none;
+        /* Убирается нижняя линия полностью */
+    }
+}
+
+/* =========================================
+   Мобильное полноэкранное меню
+   ========================================= */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-white);
+    z-index: 999;
+    transform: translateX(100%);
+    /* Скрыто за правым краем экрана */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu.is-active {
+    transform: translateX(0);
+}
+
+.mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--color-bg-light);
+    flex-shrink: 0;
+}
+
+.mobile-menu__logo {
+    max-width: 160px;
+}
+
+.mobile-menu__close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu__close:hover {
+    opacity: 0.6;
+}
+
+/* Контейнер с внутренним скроллом */
+.mobile-menu__content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 30px 24px 60px;
+}
+
+.mobile-menu__section {
+    margin-bottom: 24px;
+}
+
+.mobile-menu__title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--color-text-main);
+}
+
+.mobile-menu__list li {
+    margin-bottom: 12px;
+}
+
+.mobile-menu__list a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu__list a:hover {
+    color: var(--color-accent);
+}
+
+/* Специфичный зеленый цвет для первого списка */
+.mobile-menu__list--green a {
+    color: var(--color-accent);
+}
+
+.mobile-menu__list--green img {
+    width: 24px;
+    height: auto;
+}
+
+.mobile-menu__action {
+    margin-top: 24px;
+}
+
+.mobile-menu__btn {
+    width: 100%;
+    font-size: 14px;
+    height: 44px;
+}
+
+.mobile-menu__text {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
+.mobile-menu__btn-read {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.mobile-menu__btn-read:hover {
+    background: var(--color-accent-hover);
+}
+
+/* Пунктирные разделители, как на скриншоте */
+.mobile-menu__divider {
+    border: none;
+    border-top: 1px dashed var(--color-border);
+    margin: 24px 0;
+    opacity: 0.5;
+}
+
+.mobile-menu__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.mobile-menu__phone {
+    display: flex !important;
+    /* Переопределяем display: none из медиазапроса хедера */
+}
+
+.mobile-menu__socials {
+    display: flex;
+    gap: 16px;
+}
+
+.mobile-menu__socials a {
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu__socials a:hover {
+    opacity: 0.7;
+}
