@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // Логика Попап формы
     // =========================================
-    const btnGetFunded = document.getElementById('btn-get-funded');
+    const popupOpenBtns = document.querySelectorAll('.js-open-popup, #btn-get-funded');
     const popup = document.getElementById('funding-popup');
     const popupClose = document.querySelector('.popup__close');
     const resetBtn = document.getElementById('reset-calc');
@@ -87,7 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resetForm();
     };
 
-    if (btnGetFunded) btnGetFunded.addEventListener('click', openPopup);
+    if (popupOpenBtns.length > 0) {
+        popupOpenBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPopup();
+            });
+        });
+    }
     if (popupClose) popupClose.addEventListener('click', closePopup);
     // Обработчик клика по оверлею убран, форма закрывается только по крестику.
 

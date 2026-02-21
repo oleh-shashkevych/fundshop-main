@@ -101,6 +101,50 @@ svg {
     width: 100%;
 }
 
+/* Универсальный список с галочками */
+.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.check-list__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.check-list__icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #D0F9D2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.check-list__text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.check-list__text b,
+.check-list__text strong {
+    font-weight: 600;
+}
+
+/* Адаптив для универсального списка */
+@media (max-width: 767px) {
+    .check-list__text {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
 /* =========================================
    Header Base
    ========================================= */
@@ -1465,34 +1509,7 @@ svg {
 }
 
 .why-choose__list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
     margin-bottom: 44px;
-}
-
-.why-choose__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.why-choose__icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #D0F9D2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.why-choose__text {
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 30px;
-    color: var(--color-text-main);
 }
 
 .why-choose__outro {
@@ -1550,7 +1567,6 @@ svg {
     }
 
     .why-choose__intro,
-    .why-choose__text,
     .why-choose__outro {
         font-size: 16px;
         line-height: 24px;
@@ -2161,5 +2177,317 @@ svg {
         left: 35px;
         /* Центрируем относительно 70px */
         margin-top: 7px;
+    }
+}
+
+/* =========================================
+   Секция: Easy Qualification Guidelines
+   ========================================= */
+.qualifications {
+    background-color: var(--color-bg-light);
+    /* #FAFAFA */
+    padding: 90px 0;
+    overflow-x: hidden;
+    /* Защита от горизонтального скролла из-за вылезающей картинки */
+}
+
+/* Ограничиваем контейнер: 1296px + паддинги (24*2) */
+.qualifications__container {
+    max-width: 1344px;
+    position: relative;
+}
+
+.qualifications__img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 650px;
+    width: 31vw;
+    height: auto;
+    z-index: 2;
+}
+
+.qualifications__img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 650px;
+    width: 31vw;
+    height: auto;
+    z-index: 2;
+}
+
+.qualifications__card {
+    background-color: rgba(241, 241, 241, 0.4);
+    /* #F1F1F166 */
+    border-radius: 24px;
+    padding: 50px;
+    max-width: 750px;
+    /* Ограничиваем плашку до 750 на ПК */
+    position: relative;
+    z-index: 1;
+}
+
+.qualifications__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 78px;
+    color: var(--color-text-main);
+    margin-bottom: 40px;
+}
+
+.qualifications__text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    max-width: 530px;
+    margin-bottom: 40px;
+}
+
+.qualifications__text b,
+.qualifications__text strong {
+    font-weight: 600;
+}
+
+.qualifications__text-intro {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 35px;
+    color: var(--color-text-main);
+    max-width: 530px;
+    margin-bottom: 14px;
+}
+
+/* Переопределяем некоторые стили списка specifically для этого блока */
+.qualifications__list {
+    max-width: 530px;
+    margin-bottom: 40px;
+}
+
+.qualifications__text--full {
+    max-width: none;
+    /* Последний текст на всю ширину */
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+
+    /* Qualifications - Планшет */
+    .qualifications {
+        padding: 60px 0;
+    }
+
+    .qualifications__card {
+        max-width: 615px;
+        /* Ограничиваем ширину плашки */
+    }
+
+    .qualifications__title {
+        font-size: 34px;
+        line-height: 44px;
+    }
+
+    /* Снимаем ограничения по ширине текстов, так как ограничена сама плашка */
+    .qualifications__text,
+    .qualifications__text-intro,
+    .qualifications__list {
+        max-width: none;
+    }
+
+    .qualifications__text {
+        font-size: 17px;
+        line-height: 27px;
+    }
+
+    .qualifications__img {
+        left: 515px;
+        width: 34vw;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .qualifications__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .qualifications__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .qualifications__img {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        margin-bottom: 20px;
+        margin-inline: auto;
+    }
+
+    .qualifications__card {
+        max-width: 100%;
+        /* Плашка на всю ширину */
+        padding: 32px 24px;
+    }
+
+    .qualifications__title {
+        font-size: 32px;
+        line-height: 46px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .qualifications__text,
+    .qualifications__text-intro {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+/* =========================================
+   Секція: Application Process
+   ========================================= */
+.application {
+    background-color: var(--color-white);
+    padding: 90px 0;
+}
+
+.application__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 55px;
+    text-align: center;
+    margin-bottom: 70px;
+    /* Градієнтний текст як скрізь */
+    background: linear-gradient(270deg, #159C2A 0%, #106C1E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.application__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+}
+
+.application__card {
+    background-color: #F5F6F7;
+    border: 1px solid var(--color-border-light);
+    /* #D2D2D2 */
+    border-radius: 24px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.application__icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    margin-bottom: 32px;
+}
+
+.application__card-title {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 45px;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+}
+
+.application__card-text {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-text-main);
+    margin-bottom: 24px;
+}
+
+.application__card-text b,
+.application__card-text strong {
+    font-weight: 600;
+}
+
+.application__btn {
+    margin-top: auto;
+    /* Притискає кнопку до самого низу картки */
+    width: fit-content;
+    height: 60px;
+    background-color: var(--color-accent);
+    /* #159C2A */
+    color: var(--color-white);
+    /* #FAFAFA */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    text-transform: uppercase;
+    border-radius: 8px;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.application__btn:hover {
+    background-color: var(--color-accent-hover);
+}
+
+@media screen and (max-width: 1200px) {
+
+    /* Application Process - Планшет */
+    .application {
+        padding: 60px 0;
+    }
+
+    .application__title {
+        font-size: 34px;
+        line-height: 55px;
+        margin-bottom: 40px;
+    }
+
+    .application__grid {
+        gap: 32px;
+        /* Зменшуємо гап на планшеті */
+    }
+
+    .application__card-title {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    /* .application__card-text залишається 16px за ТЗ */
+
+    .application__btn {
+        width: 100%;
+        /* На планшеті розтягуємо кнопку */
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    /* Application Process - Мобілка */
+    .application {
+        padding: 60px 0;
+        /* За ТЗ тут теж 60px */
+    }
+
+    .application__title {
+        font-size: 32px;
+        /* line-height: 55px; - успадковується від планшета */
+    }
+
+    .application__grid {
+        grid-template-columns: 1fr;
+        /* Одна колонка */
+        gap: 80px;
+        /* Повертаємо гап 80px між картками */
     }
 }
