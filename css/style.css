@@ -997,6 +997,10 @@ svg {
     grid-column: 1 / -1;
 }
 
+.input-group {
+    position: relative;
+}
+
 .input-group label {
     display: block;
     font-weight: 400;
@@ -1071,6 +1075,9 @@ svg {
     color: #E74C3C !important;
     font-size: 12px !important;
     margin-top: 4px;
+    position: absolute;
+    top: 100%;
+    width: 100%;
 }
 
 .popup,
