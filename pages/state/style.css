@@ -1,4 +1,53 @@
 /* =========================================
+   Local Fonts (Poppins)
+   ========================================= */
+
+/* 300 - Light */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../lib/fonts/Poppins-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 400 - Regular */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../lib/fonts/Poppins-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 500 - Medium */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../lib/fonts/Poppins-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 600 - SemiBold */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../lib/fonts/Poppins-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 700 - Bold */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../lib/fonts/Poppins-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================================
    Custom Properties (Variables) & Reset
    ========================================= */
 :root {
@@ -33,6 +82,7 @@ body {
     background-color: var(--color-white);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    padding-top: 91px;
 }
 
 a {
@@ -65,6 +115,12 @@ svg {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-top: 71px;
+    }
 }
 
 /* =========================================

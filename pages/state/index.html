@@ -7,11 +7,6 @@
     <title>GoFundShop - State Page</title>
     <meta name="description" content="State business loans and funding solutions with GoFundShop.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,7 +15,7 @@
         <div class="container">
             <div class="header__inner">
                 <a href="/" class="header__logo">
-                    <img src="img/logo.svg" alt="GoFundShop" />
+                    <img src="img/logo.svg" alt="GoFundShop">
                 </a>
 
                 <div class="header__right">
@@ -50,7 +45,7 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu__header">
             <a href="/" class="mobile-menu__logo">
-                <img src="img/logo.svg" alt="GoFundShop" />
+                <img src="img/logo.svg" alt="GoFundShop">
             </a>
             <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Close menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +151,7 @@
                                             <label for="state">State</label>
                                             <div class="select-wrapper">
                                                 <select id="state" name="state" required>
-                                                    <option value="" disabled selected></option>
+                                                    <option value="" disabled selected label=" "></option>
                                                     <option value="NY">New York</option>
                                                     <option value="CA">California</option>
                                                     <option value="HI">Hawaii</option>
@@ -187,7 +182,7 @@
                                             <label for="amount-requested">Amount Requested</label>
                                             <div class="select-wrapper">
                                                 <select id="amount-requested" name="amountRequested" required>
-                                                    <option value="" disabled selected></option>
+                                                    <option value="" disabled selected label=" "></option>
                                                     <option value="10k-30k">$10,000-$30,000</option>
                                                     <option value="30k-60k">$30,000-$60,000</option>
                                                     <option value="60k+">$60,000+</option>
@@ -205,7 +200,7 @@
                                             <label for="credit-score">Personal Credit Score</label>
                                             <div class="select-wrapper">
                                                 <select id="credit-score" name="creditScore" required>
-                                                    <option value="" disabled selected></option>
+                                                    <option value="" disabled selected label=" "></option>
                                                     <option value="500-600">500-600</option>
                                                     <option value="600-650">600-650</option>
                                                     <option value="650-679">650-679</option>
@@ -224,7 +219,7 @@
                                             <label for="industry-type">Industry Type</label>
                                             <div class="select-wrapper">
                                                 <select id="industry-type" name="industryType" required>
-                                                    <option value="" disabled selected></option>
+                                                    <option value="" disabled selected label=" "></option>
                                                     <option value="Construction">Construction</option>
                                                     <option value="Retail">Retail</option>
                                                     <option value="Fundraisers">Fundraisers</option>
@@ -587,7 +582,7 @@
                     <div class="faq__item">
                         <button class="faq__question" aria-expanded="false">
                             <span>What is the best financing option for a small business in Hawaii?</span>
-                            <div class="faq__icon">
+                            <span class="faq__icon">
                                 <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect width="35" height="35" rx="17.5" fill="#F5F6F7" />
@@ -595,7 +590,7 @@
                                         stroke="#159C2A" stroke-width="2.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </div>
+                            </span>
                         </button>
                         <div class="faq__answer">
                             <div class="faq__answer-inner">
@@ -610,7 +605,7 @@
                     <div class="faq__item">
                         <button class="faq__question" aria-expanded="false">
                             <span>How to get a loan in Hawaii?</span>
-                            <div class="faq__icon">
+                            <span class="faq__icon">
                                 <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect width="35" height="35" rx="17.5" fill="#F5F6F7" />
@@ -618,7 +613,7 @@
                                         stroke="#159C2A" stroke-width="2.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </div>
+                            </span>
                         </button>
                         <div class="faq__answer">
                             <div class="faq__answer-inner">
@@ -633,7 +628,7 @@
                     <div class="faq__item">
                         <button class="faq__question" aria-expanded="false">
                             <span>Can I get a loan outside of Hawaii?</span>
-                            <div class="faq__icon">
+                            <span class="faq__icon">
                                 <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect width="35" height="35" rx="17.5" fill="#F5F6F7" />
@@ -641,7 +636,7 @@
                                         stroke="#159C2A" stroke-width="2.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                            </div>
+                            </span>
                         </button>
                         <div class="faq__answer">
                             <div class="faq__answer-inner">
@@ -693,7 +688,7 @@
 
                     <div class="footer__menus">
                         <div class="footer__col">
-                            <h4 class="footer__col-title">Financing Options</h4>
+                            <h3 class="footer__col-title">Financing Options</h3>
                             <ul class="footer__nav">
                                 <li><a href="https://www.gofundshop.com/merchant-cash-advance/">Merchant Cash
                                         Advance</a></li>
@@ -715,7 +710,7 @@
                         </div>
 
                         <div class="footer__col">
-                            <h4 class="footer__col-title">Information</h4>
+                            <h3 class="footer__col-title">Information</h3>
                             <ul class="footer__nav">
                                 <li><a href="https://www.gofundshop.com/business-loans/">Small Business Loans</a></li>
                                 <li><a href="https://partners.gofundshop.com/">Referral Program</a></li>
@@ -730,7 +725,7 @@
                         </div>
 
                         <div class="footer__col">
-                            <h4 class="footer__col-title">Certifications & Reviews</h4>
+                            <h3 class="footer__col-title">Certifications & Reviews</h3>
                             <div class="footer__partners">
                                 <img src="img/safe-secure.svg" alt="Safe Secure Confidential">
                                 <img src="img/google-reviews.svg" alt="Google Reviews">
