@@ -1548,3 +1548,167 @@ svg {
         line-height: 24px;
     }
 }
+
+/* =========================================
+   Секция: Hassle-Free
+   ========================================= */
+.hassle-free__layout {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    width: 100%;
+}
+
+.hassle-free__image-col {
+    width: 100%;
+    height: 100%;
+}
+
+.hassle-free__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hassle-free__content-col {
+    background: linear-gradient(110.83deg, rgba(21, 156, 42, 0.06) 1.08%, rgba(21, 156, 156, 0.06) 98.87%);
+    padding: 90px 24px 90px 70px;
+    display: flex;
+    align-items: center;
+}
+
+.hassle-free__content-inner {
+    max-width: 1050px;
+    width: 100%;
+}
+
+.hassle-free__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 55px;
+    margin-bottom: 30px;
+    /* Градиентный текст */
+    background: linear-gradient(270deg, #159C2A 0%, #106C1E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    /* Фолбек */
+}
+
+.hassle-free__intro {
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    color: var(--color-text-main);
+}
+
+.hassle-free__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px;
+}
+
+.hassle-free__card {
+    border-radius: 24px;
+    padding: 34px;
+}
+
+.hassle-free__card--white {
+    background-color: var(--color-white);
+}
+
+.hassle-free__card--green {
+    background-color: #D0F9D2;
+}
+
+.hassle-free__card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.hassle-free__card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.hassle-free__card-icon img {
+    width: auto;
+    height: auto;
+}
+
+.hassle-free__card--white .hassle-free__card-icon {
+    background-color: #D0F9D2;
+}
+
+.hassle-free__card--green .hassle-free__card-icon {
+    background-color: var(--color-white);
+}
+
+.hassle-free__card-title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 35px;
+    color: var(--color-text-main);
+}
+
+.hassle-free__card-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.hassle-free b,
+.hassle-free strong {
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+
+    /* Hassle-Free - Планшет */
+    .hassle-free__layout {
+        grid-template-columns: 1fr;
+        /* Перестраиваем грид в 1 колонку */
+    }
+
+    .hassle-free__img {
+        height: 450px;
+    }
+
+    .hassle-free__content-col {
+        padding: 60px 24px;
+        /* Меняем вертикальный паддинг, горизонтальный ставим 24px */
+    }
+
+    /* Добавляем центрирование контента как в контейнерах */
+    .hassle-free__content-inner {
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    /* Hassle-Free - Мобілка */
+    .hassle-free__img {
+        height: 420px;
+    }
+
+    .hassle-free__title {
+        font-size: 32px;
+        line-height: 46px;
+    }
+
+    .hassle-free__cards {
+        grid-template-columns: 1fr;
+        /* Карточки перестраиваются в 1 колонку */
+    }
+}
