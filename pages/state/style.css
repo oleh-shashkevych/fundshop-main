@@ -743,3 +743,1068 @@ svg {
     margin-bottom: 15px;
     text-align: center;
 }
+
+/* =========================================
+   Адаптив: State Hero
+   ========================================= */
+
+@media (max-width: 1200px) {
+
+    /* Планшет: сужаем отступы и шрифты, оставляем 2 колонки */
+    .state-hero {
+        padding: 110px 0 70px;
+        min-height: auto;
+    }
+
+    .state-hero__grid {
+        gap: 40px;
+    }
+
+    .state-hero__title {
+        font-size: 50px;
+        line-height: 58px;
+        margin-bottom: 40px;
+    }
+
+    .state-hero__features {
+        gap: 24px;
+        margin-bottom: 40px;
+        padding-left: 0;
+        /* Убираем левый отступ для экономии места */
+    }
+
+    .state-hero__feature img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .state-hero__feature span {
+        font-size: 18px;
+    }
+
+    .state-hero__certs-logos {
+        gap: 30px;
+    }
+
+    .state-hero__certs-logos img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    /* Узкий планшет: перестраиваем в 1 колонку */
+    .state-hero__grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    /* Ограничиваем ширину левого контента, чтобы не растягивался на всю строку */
+    .state-hero__left {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .state-hero__title {
+        font-size: 44px;
+        line-height: 52px;
+    }
+
+    .state-hero__features {
+        align-items: center;
+        /* Центрируем фичи */
+    }
+
+    .state-hero__feature {
+        text-align: left;
+        /* Текст внутри фичи оставляем слева от иконки */
+    }
+
+    .state-hero__certs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .state-hero__form-card {
+        margin: 0 auto;
+        /* Центрируем саму форму */
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Мобілка */
+    .state-hero {
+        padding: 100px 0 60px;
+    }
+
+    .state-hero__title {
+        font-size: 36px;
+        line-height: 44px;
+        margin-bottom: 30px;
+    }
+
+    .state-hero__features {
+        gap: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+        /* На узких экранах возвращаем фичи к левому краю */
+    }
+
+    .state-hero__feature {
+        gap: 12px;
+    }
+
+    .state-hero__feature img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .state-hero__feature span {
+        font-size: 16px;
+    }
+
+    .state-hero__certs {
+        align-items: flex-start;
+        /* Возвращаем к левому краю */
+    }
+
+    .state-hero__certs-logos {
+        flex-wrap: wrap;
+        /* Разрешаем перенос логотипов, если не влезут */
+        gap: 20px;
+    }
+
+    /* Адаптив самой формы (перестраиваем инпуты в 1 колонку) */
+    .popup__top {
+        padding: 30px 20px 20px;
+    }
+
+    .popup__bottom {
+        padding: 24px 20px 30px;
+    }
+
+    .popup__grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .popup__actions-top {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .popup__divider {
+        display: none;
+        /* Убираем вертикальную черту между ссылками */
+    }
+
+    .popup__title {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .popup__subtitle {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
+}
+
+/* =========================================
+   Секція: State Content (Текстовий блок)
+   ========================================= */
+.state-content {
+    background-color: var(--color-white);
+    padding: 90px 0;
+}
+
+/* 1365px + 24px * 2 (паддинги контейнера) = 1413px */
+.state-content__container {
+    max-width: 1413px;
+}
+
+/* Обгортка одного текстового блоку */
+.state-content__block {
+    padding: 0 24px 32px 24px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--color-border-light);
+    /* #D2D2D2 */
+}
+
+/* Для останнього блоку прибираємо лінію і відступ */
+.state-content__block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Заголовки всередині блоку */
+.state-content__block h2,
+.state-content__block h3 {
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1;
+    color: var(--color-text-main);
+    margin-bottom: 15px;
+}
+
+/* Колір для штату в заголовку */
+.state-content__block h2 span,
+.state-content__block h3 span {
+    color: var(--color-accent);
+    /* #159C2A */
+}
+
+/* Параграфи */
+.state-content__block p {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--color-text-main);
+    margin-bottom: 22px;
+}
+
+/* Списки */
+.state-content__block ul {
+    margin: 0 0 22px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.state-content__block li {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    margin-bottom: 5px;
+    position: relative;
+    /* 5px ширина крапки + 14px відступ = 19px */
+    padding-left: 19px;
+}
+
+/* Кастомна крапка списку */
+.state-content__block li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    /* Вирівнюємо крапку по вертикалі відносно першого рядка (line-height 30px -> центр 15px -> мінус половина крапки 2.5px = 12.5px) */
+    top: 12.5px;
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-accent);
+    /* #159C2A */
+    border-radius: 50%;
+}
+
+/* Прибираємо марджин у останнього елемента списку */
+.state-content__block li:last-child {
+    margin-bottom: 0;
+}
+
+/* ГЛОБАЛЬНЕ ПРАВИЛО ДЛЯ БЛОКУ: 
+   Якщо будь-який елемент (p, ul, h2) є останнім всередині обгортки - його нижній відступ дорівнює 0 */
+.state-content__block>*:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================
+   Адаптив: State Content
+   ========================================= */
+
+@media (max-width: 1200px) {
+
+    /* State Content - Планшет */
+    .state-content {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* State Content - Мобілка */
+    .state-content {
+        padding: 40px 0;
+    }
+
+    .state-content__block {
+        /* Прибираємо бічні відступи на мобілці для економії простору */
+        padding: 0 0 24px 0;
+        margin-bottom: 24px;
+    }
+
+    .state-content__block h2,
+    .state-content__block h3 {
+        font-size: 18px;
+        /* Трохи менший заголовок */
+        line-height: 24px;
+    }
+
+    /* Рядки тексту залишаються 16px за стандартом для гарної читабельності */
+}
+
+/* =========================================
+   Секція: Types of Small Business Loans
+   ========================================= */
+.loans {
+    background-color: var(--color-bg-light);
+    /* #FAFAFA */
+    padding: 90px 0;
+    position: relative;
+    /* Для правильної роботи fixed тултипа на мобілці */
+}
+
+.loans__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 78px;
+    text-align: center;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+}
+
+.loans__subtitle {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 35px;
+    text-align: center;
+    color: var(--color-text-main);
+    margin-bottom: 70px;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.loans__layout {
+    display: grid;
+    grid-template-columns: 885fr 500fr;
+    gap: 70px;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+/* --- Ліва частина: Список --- */
+.loans__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.loans__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 44px;
+    padding: 32px;
+    border: 1px solid rgba(105, 106, 108, 0.5);
+    /* #696A6C80 */
+    border-radius: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.loans__item.is-active,
+.loans__item:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-accent);
+    /* #159C2A */
+}
+
+.loans__item-icon {
+    width: 100px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.loans__item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.loans__item-title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    margin-bottom: 20px;
+}
+
+.loans__item-text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.loans__item-text b,
+.loans__item-text strong {
+    font-weight: 600;
+}
+
+/* --- Права частина: Тултип --- */
+.loans__tooltip-wrapper {
+    position: relative;
+}
+
+.loans__tooltip {
+    background-color: #E4F5FD;
+    border-radius: 24px;
+    padding: 34px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    position: sticky;
+    top: 160px;
+    /* Прилипає при скролі */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.loans__tooltip-close {
+    display: none;
+    /* Сховано на ПК */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.loans__tooltip-icon {
+    flex-shrink: 0;
+}
+
+.loans__tooltip-text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.loans__tooltip-text b,
+.loans__tooltip-text strong {
+    font-weight: 600;
+}
+
+/* =========================================
+   Адаптив: Types of Loans
+   ========================================= */
+@media (max-width: 1200px) {
+    .loans {
+        padding: 60px 0;
+    }
+
+    .loans__title {
+        font-size: 34px;
+        line-height: 78px;
+    }
+
+    .loans__subtitle {
+        font-size: 22px;
+    }
+
+    .loans__layout {
+        grid-template-columns: 496fr 336fr;
+        gap: 32px;
+    }
+
+    .loans__item {
+        align-items: center;
+    }
+
+    .loans__item-title,
+    .loans__item-text,
+    .loans__tooltip-text {
+        font-size: 16px;
+    }
+
+    .loans__tooltip {
+        padding: 34px 24px;
+        top: 140px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .loans__title {
+        font-size: 32px;
+        line-height: 46px;
+        margin-bottom: 40px;
+    }
+
+    .loans__subtitle {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 40px;
+    }
+
+    .loans__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .loans__item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 44px;
+    }
+
+    .loans__item-icon img {
+        object-position: center;
+    }
+
+    /* Мобільний фіксований тултип */
+    .loans__tooltip-wrapper {
+        position: static;
+    }
+
+    .loans__tooltip {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: unset;
+        width: 100%;
+        border-radius: 24px 24px 0 0;
+        gap: 14px;
+        padding: 34px 24px;
+        z-index: 90;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(120%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .loans__tooltip.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .loans__tooltip-close {
+        display: block;
+    }
+}
+
+/* =========================================
+   Секция: Process
+   ========================================= */
+.process {
+    background: linear-gradient(110.83deg, rgba(21, 156, 156, 0.06) 1.08%, rgba(21, 156, 42, 0.06) 98.87%);
+    padding: 90px 0;
+}
+
+.process__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.process__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 55px;
+    text-align: center;
+    margin-bottom: 70px;
+    /* Градиентный текст */
+    background: linear-gradient(270deg, #159C2A 0%, #106C1E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+    /* Отступ между шагами */
+}
+
+.process__step {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.process__step-number {
+    width: 106px;
+    background: #C3C3C4;
+    border-radius: 24px 0 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 30px;
+    color: var(--color-white);
+    /* #FAFAFA */
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+/* Hover и активное состояние для цифры */
+.process__step:hover .process__step-number,
+.process__step.is-active .process__step-number {
+    background: var(--color-accent);
+    /* #159C2A */
+}
+
+.process__step-content {
+    background: var(--color-white);
+    padding: 32px;
+    border-radius: 0 24px 24px 0;
+    flex-grow: 1;
+}
+
+.process__step-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    margin-bottom: 20px;
+}
+
+.process__step-text {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.process__step-text a {
+    color: var(--color-accent);
+    /* #159C2A */
+    text-decoration: underline;
+}
+
+/* Линия-соединитель */
+.process__step-line {
+    position: absolute;
+    width: 1px;
+    height: 60px;
+    background: #C3C3C4;
+    left: 53px;
+    /* Ровно по центру от 106px */
+    top: 100%;
+    margin-top: 7.5px;
+    /* Зазор сверху, чтобы до следующего блока оставалось 7.5px снизу (в сумме 15px + 60px линии = 75px gap) */
+}
+
+@media screen and (max-width: 1200px) {
+
+    /* Process - Планшет */
+    .process {
+        padding: 60px 0;
+    }
+
+    .process__title {
+        font-size: 34px;
+        margin-bottom: 50px;
+    }
+
+    .process__step-title {
+        font-size: 20px;
+    }
+
+    .process__step-text {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    /* Process - Мобілка */
+    .process {
+        padding: 40px 0;
+    }
+
+    .process__title {
+        font-size: 30px;
+        line-height: 42px;
+        margin-bottom: 40px;
+    }
+
+    .process__steps {
+        gap: 40px;
+        /* Уменьшаем отступы между шагами */
+    }
+
+    .process__step-number {
+        width: 70px;
+        font-size: 32px;
+        border-radius: 16px 0 0 16px;
+        /* Смягчаем радиус */
+    }
+
+    .process__step-content {
+        padding: 24px 20px;
+        border-radius: 0 16px 16px 0;
+    }
+
+    .process__step-title {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 12px;
+    }
+
+    .process__step-text {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .process__step-line {
+        height: 26px;
+        /* Уменьшаем высоту линии для мобилки */
+        left: 35px;
+        /* Центрируем относительно 70px */
+        margin-top: 7px;
+    }
+}
+
+/* =========================================
+   Секція: FAQ
+   ========================================= */
+.faq {
+    background-color: var(--color-bg-light);
+    /* #FAFAFA */
+    padding: 90px 0;
+}
+
+.faq__container {
+    max-width: 1288px;
+    /* 1240px + 24px + 24px (паддинги) */
+}
+
+.faq__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1;
+    text-align: center;
+    color: var(--color-text-main);
+    margin-bottom: 55px;
+}
+
+.faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.faq__item {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    overflow: hidden;
+    /* Щоб контент не вилазив при анімації */
+}
+
+.faq__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 80px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.faq__question span {
+    /* ТЗ: Sofia Pro, але якщо його немає, буде fallback на Poppins/sans-serif */
+    font-family: 'Sofia Pro', var(--font-main);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--color-text-main);
+}
+
+.faq__icon {
+    flex-shrink: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+/* Магія перетворення плюса на мінус: 
+  Вертикальна лінія SVG має шлях (path). Ми просто крутимо всю іконку.
+  Оскільки ми крутимо, нам треба сховати вертикальну лінію через CSS.
+*/
+.faq__item.is-active .faq__icon {
+    transform: rotate(180deg);
+}
+
+.faq__item.is-active .faq__icon path {
+    /* Використовуємо stroke-dasharray для створення ілюзії зникнення вертикальної лінії */
+}
+
+/* Відповідь: прихована за замовчуванням через висоту 0 */
+.faq__answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.faq__item.is-active .faq__answer {
+    grid-template-rows: 1fr;
+}
+
+.faq__answer-inner {
+    overflow: hidden;
+}
+
+/* Паддінги для самого тексту відповіді, щоб він не прилипав до країв і заголовка */
+.faq__answer-inner p {
+    padding: 0 24px 24px 24px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-text-main);
+}
+
+/* =========================================
+   Адаптив: FAQ
+   ========================================= */
+@media (max-width: 1200px) {
+    .faq {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .faq {
+        padding: 40px 0;
+    }
+
+    .faq__title {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .faq__question {
+        padding: 16px 20px;
+        gap: 20px;
+        /* Зменшуємо гап на мобілці, щоб текст вліз */
+    }
+
+    .faq__question span {
+        font-size: 18px;
+        line-height: 1.4;
+        /* Збільшуємо міжрядковий інтервал, бо текст може переноситись */
+    }
+
+    .faq__answer-inner p {
+        padding: 0 20px 20px 20px;
+        font-size: 14px;
+    }
+}
+
+/* =========================================
+   Секція: Footer
+   ========================================= */
+.footer__top-bar {
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(110.83deg, rgba(21, 156, 156, 0.06) 1.08%, rgba(21, 156, 42, 0.06) 98.87%);
+}
+
+.footer__main {
+    background-color: var(--color-white);
+    padding: 90px 0;
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 100px;
+}
+
+/* --- Ліва колонка --- */
+.footer__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__logo {
+    max-width: 270px;
+    margin-bottom: 44px;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.footer__logo:hover {
+    opacity: 0.8;
+}
+
+.footer__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 44px;
+}
+
+.footer__contacts a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-text-main);
+    transition: color 0.3s ease;
+    width: fit-content;
+}
+
+.footer__contacts a:hover {
+    color: var(--color-accent);
+}
+
+.footer__socials {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 44px;
+}
+
+.footer__socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer__socials a:hover {
+    opacity: 0.7;
+    transform: translateY(-2px);
+}
+
+.footer__address {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+/* --- Права колонка (Грід меню) --- */
+.footer__menus {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 87px;
+}
+
+.footer__col-title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--color-text-main);
+    margin-bottom: 24px;
+}
+
+.footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.footer__nav a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-text-main);
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer__nav a:hover {
+    color: var(--color-accent);
+}
+
+.footer__partners {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.footer__partners img {
+    height: 37px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- Копірайт --- */
+.footer__bottom {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.footer__bottom p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.footer__bottom a {
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.footer__bottom a:hover {
+    color: var(--color-accent);
+}
+
+@media (max-width: 1200px) {
+
+    /* Footer - Планшет */
+    .footer__main {
+        padding: 60px 0;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .footer__info {
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer__logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer__contacts {
+        align-items: center;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Footer - Мобілка */
+    .footer__grid {
+        gap: 40px;
+    }
+
+    .footer__address {
+        margin-right: auto;
+    }
+
+    .footer__contacts {
+        align-items: flex-start;
+    }
+
+    .footer__menus {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

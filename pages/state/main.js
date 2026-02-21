@@ -248,4 +248,118 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         }
     }
+
+    // =========================================
+    // Секция Loans: Логика тултипов
+    // =========================================
+    const loanItems = document.querySelectorAll('.loans__item');
+    const tooltipTextContainer = document.getElementById('tooltip-text');
+    const tooltipElement = document.getElementById('dynamic-tooltip');
+    const tooltipCloseBtn = document.getElementById('tooltip-close');
+    const loansSection = document.getElementById('loans-section');
+
+    if (loanItems.length > 0 && tooltipTextContainer && loansSection) {
+        let tooltipClosedManually = false;
+
+        const updateTooltip = (item) => {
+            loanItems.forEach(el => el.classList.remove('is-active'));
+            item.classList.add('is-active');
+            tooltipTextContainer.innerHTML = item.getAttribute('data-tooltip');
+        };
+
+        loanItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 767) updateTooltip(item);
+            });
+
+            item.addEventListener('click', (e) => {
+                if (window.innerWidth <= 767) {
+                    e.preventDefault();
+                    updateTooltip(item);
+                    tooltipElement.classList.add('is-visible');
+                    tooltipClosedManually = false;
+                }
+            });
+        });
+
+        if (tooltipCloseBtn) {
+            tooltipCloseBtn.addEventListener('click', () => {
+                tooltipElement.classList.remove('is-visible');
+                tooltipClosedManually = true;
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 767) {
+                const sectionRect = loansSection.getBoundingClientRect();
+                const inView = (sectionRect.top < window.innerHeight - 100) && (sectionRect.bottom > 100);
+
+                if (inView) {
+                    if (!tooltipElement.classList.contains('is-visible') && !tooltipClosedManually) {
+                        tooltipElement.classList.add('is-visible');
+                    }
+                } else {
+                    if (tooltipElement.classList.contains('is-visible')) {
+                        tooltipElement.classList.remove('is-visible');
+                    }
+                    tooltipClosedManually = false;
+                }
+            }
+        });
+    }
+
+    // =========================================
+    // Секция Process: Смена цвета шагов по клику
+    // =========================================
+    const processSteps = document.querySelectorAll('.process__step');
+
+    if (processSteps.length > 0) {
+        processSteps.forEach(step => {
+            step.addEventListener('click', () => {
+                // Убираем активный класс у всех шагов
+                processSteps.forEach(el => el.classList.remove('is-active'));
+                // Добавляем кликнутому
+                step.classList.add('is-active');
+            });
+        });
+    }
+
+    // =========================================
+    // Секция FAQ: Аккордеон
+    // =========================================
+    const faqItems = document.querySelectorAll('.faq__item');
+
+    if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+            const questionBtn = item.querySelector('.faq__question');
+
+            questionBtn.addEventListener('click', () => {
+                const isActive = item.classList.contains('is-active');
+
+                // Закрываем все открытые вопросы
+                faqItems.forEach(el => {
+                    el.classList.remove('is-active');
+                    el.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+
+                    // Меняем минус обратно на плюс
+                    const path = el.querySelector('.faq__icon path');
+                    if (path) {
+                        path.setAttribute('d', 'M28.5 17.5H17.5M17.5 17.5H6.5M17.5 17.5V6.5M17.5 17.5V28.5');
+                    }
+                });
+
+                // Если элемент не был активен, открываем его
+                if (!isActive) {
+                    item.classList.add('is-active');
+                    questionBtn.setAttribute('aria-expanded', 'true');
+
+                    // Меняем плюс на минус (убираем вертикальную линию в SVG)
+                    const activePath = item.querySelector('.faq__icon path');
+                    if (activePath) {
+                        activePath.setAttribute('d', 'M28.5 17.5H6.5'); // Только горизонтальная линия
+                    }
+                }
+            });
+        });
+    }
 });
