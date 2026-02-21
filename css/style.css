@@ -629,6 +629,10 @@ svg {
         padding: 0 20px;
         font-size: 16px;
     }
+
+    .header__dropdown {
+        max-width: calc(100vw - 48px);
+    }
 }
 
 /* Адаптив: Планшет (до 1200px) */
@@ -1092,6 +1096,10 @@ svg {
     align-items: flex-start;
     gap: 14px;
     margin-bottom: 32px;
+}
+
+.popup__info svg {
+    flex-shrink: 0;
 }
 
 .popup__info p {
@@ -1710,5 +1718,448 @@ svg {
     .hassle-free__cards {
         grid-template-columns: 1fr;
         /* Карточки перестраиваются в 1 колонку */
+    }
+}
+
+/* =========================================
+   Секция: Types of Small Business Loans
+   ========================================= */
+.loans {
+    background-color: var(--color-bg-light);
+    /* #FAFAFA */
+    padding: 90px 0;
+    position: relative;
+    /* Для правильной работы fixed тултипа на мобилке */
+}
+
+.loans__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 78px;
+    text-align: center;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+}
+
+.loans__subtitle {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 35px;
+    text-align: center;
+    color: var(--color-text-main);
+    margin-bottom: 70px;
+}
+
+/* Утилиты для текста */
+.text-green {
+    color: #108823;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.loans__layout {
+    display: grid;
+    grid-template-columns: 885fr 500fr;
+    /* Соотношение из ТЗ */
+    gap: 70px;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+/* --- Левая часть: Список --- */
+.loans__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.loans__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 44px;
+    padding: 32px;
+    border: 1px solid rgba(105, 106, 108, 0.5);
+    /* #696A6C80 */
+    border-radius: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.loans__item.is-active,
+.loans__item:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-accent);
+    /* #159C2A */
+}
+
+.loans__item-icon {
+    width: 100px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.loans__item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.loans__item-title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    margin-bottom: 20px;
+}
+
+.loans__item-text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.loans__item-text b,
+.loans__item-text strong {
+    font-weight: 600;
+}
+
+.loans__item-text a {
+    text-decoration: underline;
+}
+
+/* --- Правая часть: Тултип --- */
+.loans__tooltip-wrapper {
+    position: relative;
+    /* Обертка нужна для липкости на мобилках */
+}
+
+.loans__tooltip {
+    background-color: #E4F5FD;
+    border-radius: 24px;
+    padding: 34px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    position: sticky;
+    top: 160px;
+    /* Прилипает при скролле (отступ от хедера) */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.loans__tooltip-close {
+    display: none;
+    /* Скрыт на ПК */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.loans__tooltip-icon {
+    flex-shrink: 0;
+}
+
+.loans__tooltip-text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.loans__tooltip-text b,
+.loans__tooltip-text strong {
+    font-weight: 600;
+}
+
+/* =========================================
+   Адаптив: Types of Loans
+   ========================================= */
+@media (max-width: 1200px) {
+
+    /* Планшет */
+    .loans {
+        padding: 60px 0;
+    }
+
+    .loans__title {
+        font-size: 34px;
+        line-height: 78px;
+    }
+
+    .loans__subtitle {
+        font-size: 22px;
+    }
+
+    .loans__layout {
+        grid-template-columns: 496fr 336fr;
+        gap: 32px;
+    }
+
+    .loans__item {
+        align-items: center;
+    }
+
+    .loans__item-title,
+    .loans__item-text,
+    .loans__tooltip-text {
+        font-size: 16px;
+    }
+
+    .loans__tooltip {
+        padding: 34px 24px;
+        top: 140px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Мобілка */
+    .loans__title {
+        font-size: 32px;
+        line-height: 46px;
+        margin-bottom: 40px;
+    }
+
+    .loans__subtitle {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 40px;
+    }
+
+    .loans__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .loans__item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 44px;
+    }
+
+    .loans__item-icon img {
+        object-position: center;
+        /* Центруем иконку */
+    }
+
+    /* Мобильный фиксированный тултип */
+    .loans__tooltip-wrapper {
+        position: static;
+        /* Снимаем sticky с обертки */
+    }
+
+    .loans__tooltip {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: unset;
+        width: 100%;
+        border-radius: 24px 24px 0 0;
+        /* Скругление только сверху */
+        gap: 14px;
+        padding: 34px 24px;
+        z-index: 90;
+        /* Поверх контента, но под хедером */
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(120%);
+        /* Скрыт по умолчанию */
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .loans__tooltip.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .loans__tooltip-close {
+        display: block;
+        /* Показываем крестик */
+    }
+}
+
+/* =========================================
+   Секция: Process
+   ========================================= */
+.process {
+    background: linear-gradient(110.83deg, rgba(21, 156, 156, 0.06) 1.08%, rgba(21, 156, 42, 0.06) 98.87%);
+    padding: 90px 0;
+}
+
+.process__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.process__title {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 55px;
+    text-align: center;
+    margin-bottom: 70px;
+    /* Градиентный текст */
+    background: linear-gradient(270deg, #159C2A 0%, #106C1E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+    /* Отступ между шагами */
+}
+
+.process__step {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.process__step-number {
+    width: 106px;
+    background: #C3C3C4;
+    border-radius: 24px 0 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 30px;
+    color: var(--color-white);
+    /* #FAFAFA */
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+/* Hover и активное состояние для цифры */
+.process__step:hover .process__step-number,
+.process__step.is-active .process__step-number {
+    background: var(--color-accent);
+    /* #159C2A */
+}
+
+.process__step-content {
+    background: var(--color-white);
+    padding: 32px;
+    border-radius: 0 24px 24px 0;
+    flex-grow: 1;
+}
+
+.process__step-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    margin-bottom: 20px;
+}
+
+.process__step-text {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 30px;
+    color: var(--color-text-main);
+}
+
+.process__step-text a {
+    color: var(--color-accent);
+    /* #159C2A */
+    text-decoration: underline;
+}
+
+/* Линия-соединитель */
+.process__step-line {
+    position: absolute;
+    width: 1px;
+    height: 60px;
+    background: #C3C3C4;
+    left: 53px;
+    /* Ровно по центру от 106px */
+    top: 100%;
+    margin-top: 7.5px;
+    /* Зазор сверху, чтобы до следующего блока оставалось 7.5px снизу (в сумме 15px + 60px линии = 75px gap) */
+}
+
+@media screen and (max-width: 1200px) {
+
+    /* Process - Планшет */
+    .process {
+        padding: 60px 0;
+    }
+
+    .process__title {
+        font-size: 34px;
+        margin-bottom: 50px;
+    }
+
+    .process__step-title {
+        font-size: 20px;
+    }
+
+    .process__step-text {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    /* Process - Мобілка */
+    .process {
+        padding: 40px 0;
+    }
+
+    .process__title {
+        font-size: 30px;
+        line-height: 42px;
+        margin-bottom: 40px;
+    }
+
+    .process__steps {
+        gap: 40px;
+        /* Уменьшаем отступы между шагами */
+    }
+
+    .process__step-number {
+        width: 70px;
+        font-size: 32px;
+        border-radius: 16px 0 0 16px;
+        /* Смягчаем радиус */
+    }
+
+    .process__step-content {
+        padding: 24px 20px;
+        border-radius: 0 16px 16px 0;
+    }
+
+    .process__step-title {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 12px;
+    }
+
+    .process__step-text {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .process__step-line {
+        height: 26px;
+        /* Уменьшаем высоту линии для мобилки */
+        left: 35px;
+        /* Центрируем относительно 70px */
+        margin-top: 7px;
     }
 }

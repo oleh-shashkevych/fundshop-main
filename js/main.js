@@ -241,4 +241,100 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
             });
     }
+
+    // =========================================
+    // Секция Loans: Логика тултипов
+    // =========================================
+    const loanItems = document.querySelectorAll('.loans__item');
+    const tooltipTextContainer = document.getElementById('tooltip-text');
+    const tooltipElement = document.getElementById('dynamic-tooltip');
+    const tooltipCloseBtn = document.getElementById('tooltip-close');
+    const loansSection = document.getElementById('loans-section');
+
+    if (loanItems.length > 0 && tooltipTextContainer && loansSection) {
+
+        // Флаг для отслеживания ручного закрытия
+        let tooltipClosedManually = false;
+
+        // Функция обновления контента
+        const updateTooltip = (item) => {
+            // Убираем класс у всех
+            loanItems.forEach(el => el.classList.remove('is-active'));
+            // Добавляем текущему
+            item.classList.add('is-active');
+            // Обновляем текст
+            tooltipTextContainer.innerHTML = item.getAttribute('data-tooltip');
+        };
+
+        // Обработчики для каждого блока
+        loanItems.forEach(item => {
+            // Для ПК: смена по наведению
+            item.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 767) {
+                    updateTooltip(item);
+                }
+            });
+
+            // Для Мобилок: смена и открытие по клику
+            item.addEventListener('click', (e) => {
+                if (window.innerWidth <= 767) {
+                    e.preventDefault(); // Если внутри ссылка
+                    updateTooltip(item);
+                    tooltipElement.classList.add('is-visible');
+                    // Сбрасываем флаг, так как пользователь сам захотел открыть тултип
+                    tooltipClosedManually = false;
+                }
+            });
+        });
+
+        // Закрытие мобильного тултипа по крестику
+        if (tooltipCloseBtn) {
+            tooltipCloseBtn.addEventListener('click', () => {
+                tooltipElement.classList.remove('is-visible');
+                // Запоминаем, что юзер закрыл его, чтобы он не прыгал обратно при скролле
+                tooltipClosedManually = true;
+            });
+        }
+
+        // Логика автоматического показа/скрытия при скролле (только для мобилок)
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 767) {
+                const sectionRect = loansSection.getBoundingClientRect();
+
+                // Проверяем, находится ли секция в зоне видимости
+                // offset 100px - чтобы тултип появлялся/исчезал не по первому же пикселю секции
+                const inView = (sectionRect.top < window.innerHeight - 100) && (sectionRect.bottom > 100);
+
+                if (inView) {
+                    // Если секция на экране, и юзер не закрывал тултип руками — показываем
+                    if (!tooltipElement.classList.contains('is-visible') && !tooltipClosedManually) {
+                        tooltipElement.classList.add('is-visible');
+                    }
+                } else {
+                    // Если вышли за пределы секции — скрываем
+                    if (tooltipElement.classList.contains('is-visible')) {
+                        tooltipElement.classList.remove('is-visible');
+                    }
+                    // Сбрасываем ручное закрытие. Если юзер вернется к секции позже, тултип снова покажется
+                    tooltipClosedManually = false;
+                }
+            }
+        });
+    }
+
+    // =========================================
+    // Секция Process: Смена цвета шагов по клику
+    // =========================================
+    const processSteps = document.querySelectorAll('.process__step');
+
+    if (processSteps.length > 0) {
+        processSteps.forEach(step => {
+            step.addEventListener('click', () => {
+                // Убираем активный класс у всех шагов
+                processSteps.forEach(el => el.classList.remove('is-active'));
+                // Добавляем кликнутому
+                step.classList.add('is-active');
+            });
+        });
+    }
 });
