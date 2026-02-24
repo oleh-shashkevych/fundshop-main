@@ -20,16 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // Мобильное меню (Оновлено)
+    // Мобильное меню
     // =========================================
     const burgerBtn = document.querySelector('.header__burger');
     const mobileMenu = document.getElementById('mobile-menu');
+    const headerSearch = document.querySelector('.header__search'); // Знаходимо поле пошуку
 
     if (burgerBtn && mobileMenu) {
-        // Використовуємо бургер для відкриття/закриття
         burgerBtn.addEventListener('click', () => {
             const isActive = mobileMenu.classList.toggle('is-active');
-            burgerBtn.classList.toggle('is-active'); // Цей клас запустить анімацію перетворення на хрестик
+            burgerBtn.classList.toggle('is-active');
+
+            // Ховаємо пошук, якщо меню відкрите, і повертаємо, якщо закрите
+            if (headerSearch) {
+                headerSearch.style.display = isActive ? 'none' : '';
+            }
 
             if (isActive) {
                 document.body.style.overflow = 'hidden';
@@ -84,6 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     const headerHeight = document.querySelector('.header').offsetHeight;
                     const y = formSection.getBoundingClientRect().top + window.scrollY - headerHeight;
                     window.scrollTo({ top: y, behavior: 'smooth' });
+
+                    // Закриваємо мобільне меню, якщо скрол відбувся з нього
+                    const mobileMenuNode = document.getElementById('mobile-menu');
+                    const burgerNode = document.querySelector('.header__burger');
+                    const searchNode = document.querySelector('.header__search'); // Знаходимо пошук
+
+                    if (mobileMenuNode && mobileMenuNode.classList.contains('is-active')) {
+                        mobileMenuNode.classList.remove('is-active');
+                        if (burgerNode) burgerNode.classList.remove('is-active');
+                        if (searchNode) searchNode.style.display = ''; // Відновлюємо видимість пошуку
+                        document.body.style.overflow = '';
+                    }
                 }
             });
         });
