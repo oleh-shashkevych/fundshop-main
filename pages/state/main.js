@@ -35,21 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // Мобильное меню
+    // Мобильное меню (Оновлено)
     // =========================================
     const burgerBtn = document.querySelector('.header__burger');
-    const closeBtn = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    if (burgerBtn && closeBtn && mobileMenu) {
+    if (burgerBtn && mobileMenu) {
         burgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('is-active');
-            document.body.style.overflow = 'hidden';
-        });
+            const isActive = mobileMenu.classList.toggle('is-active');
+            burgerBtn.classList.toggle('is-active'); // Перетворюємо на хрестик
 
-        closeBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('is-active');
-            document.body.style.overflow = '';
+            if (isActive) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
     }
 
@@ -250,18 +250,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // Секция Loans: Логика тултипов
+    // Секция Loans: Логика тултипов (з автоскролом)
     // =========================================
     const loanItems = document.querySelectorAll('.loans__item');
     const tooltipTextContainer = document.getElementById('tooltip-text');
     const tooltipElement = document.getElementById('dynamic-tooltip');
     const tooltipCloseBtn = document.getElementById('tooltip-close');
     const loansSection = document.getElementById('loans-section');
+    const headerNode = document.getElementById('state-header');
 
     if (loanItems.length > 0 && tooltipTextContainer && loansSection) {
+
         let tooltipClosedManually = false;
+        let isHovered = false;
 
         const updateTooltip = (item) => {
+            if (item.classList.contains('is-active')) return;
+
             loanItems.forEach(el => el.classList.remove('is-active'));
             item.classList.add('is-active');
             tooltipTextContainer.innerHTML = item.getAttribute('data-tooltip');
@@ -269,7 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         loanItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 767) updateTooltip(item);
+                isHovered = true;
+                if (window.innerWidth > 767) {
+                    updateTooltip(item);
+                }
+            });
+
+            item.addEventListener('mouseleave', () => {
+                isHovered = false;
             });
 
             item.addEventListener('click', (e) => {
@@ -290,6 +302,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener('scroll', () => {
+            // Автоперемикання контенту при скролі
+            if (!isHovered) {
+                const headerHeight = headerNode ? headerNode.offsetHeight : 100;
+                let activeItem = null;
+
+                for (let i = 0; i < loanItems.length; i++) {
+                    const rect = loanItems[i].getBoundingClientRect();
+                    if (rect.bottom > headerHeight + 50) {
+                        activeItem = loanItems[i];
+                        break;
+                    }
+                }
+
+                const sectionRect = loansSection.getBoundingClientRect();
+                const inSectionView = sectionRect.top < window.innerHeight && sectionRect.bottom > headerHeight;
+
+                if (activeItem && inSectionView) {
+                    updateTooltip(activeItem);
+                }
+            }
+
+            // Показ/сховування плашки на мобілках
             if (window.innerWidth <= 767) {
                 const sectionRect = loansSection.getBoundingClientRect();
                 const inView = (sectionRect.top < window.innerHeight - 100) && (sectionRect.bottom > 100);
@@ -305,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     tooltipClosedManually = false;
                 }
             }
-        });
+        }, { passive: true });
     }
 
     // =========================================

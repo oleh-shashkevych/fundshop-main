@@ -142,7 +142,7 @@ svg {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 1000;
     background-color: var(--color-white);
     /* Белый по дефолту */
     border-bottom: 1px solid transparent;
@@ -244,6 +244,19 @@ svg {
 
 .header__burger {
     display: none;
+    z-index: 1001;
+}
+
+.header__burger.is-active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.header__burger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.header__burger.is-active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 /* =========================================
@@ -335,6 +348,7 @@ svg {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
 }
 
 .mobile-menu.is-active {
@@ -348,6 +362,7 @@ svg {
     padding: 14px 24px;
     border-bottom: 1px solid var(--color-bg-light);
     flex-shrink: 0;
+    display: none;
 }
 
 .mobile-menu__logo {
@@ -1222,7 +1237,6 @@ svg {
 
 .loans__tooltip-close {
     display: none;
-    /* Сховано на ПК */
     position: absolute;
     top: 10px;
     right: 10px;
@@ -1230,6 +1244,15 @@ svg {
     border: none;
     cursor: pointer;
     padding: 5px;
+    outline: none;
+    /* Прибираємо стандартний аутлайн */
+    -webkit-tap-highlight-color: transparent;
+    /* Прибираємо спалах при тапі на мобілках */
+}
+
+.loans__tooltip-close:focus,
+.loans__tooltip-close:active {
+    outline: none;
 }
 
 .loans__tooltip-icon {
@@ -1344,6 +1367,89 @@ svg {
 
     .loans__tooltip-close {
         display: block;
+    }
+}
+
+/* =========================================
+   Секція: Features
+   ========================================= */
+.features {
+    background-color: var(--color-bg-light);
+    padding: 60px 0;
+}
+
+.features__grid-wrapper {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.features__item {
+    display: flex;
+    align-items: center;
+    min-height: 118px;
+    padding: 0 32px;
+    background-color: transparent;
+    border: 1px solid rgba(105, 106, 108, 0.5);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.features__item:hover {
+    background-color: #EAF5EC;
+    border-color: var(--color-accent);
+}
+
+.features__icon {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    margin-right: 24px;
+    flex-shrink: 0;
+}
+
+.features__text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--color-text-main);
+    text-align: left;
+}
+
+@media (max-width: 1200px) {
+    .features {
+        padding: 40px 0;
+    }
+
+    .features__item {
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+        padding: 20px;
+    }
+
+    .features__icon {
+        margin-right: 0;
+    }
+
+    .features__text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .features {
+        padding: 32px 0;
+    }
+
+    .features__grid {
+        grid-template-columns: 1fr;
     }
 }
 
