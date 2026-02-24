@@ -222,7 +222,7 @@ svg {
     left: 0;
     width: 100%;
     background: var(--color-bg-light);
-    z-index: 100;
+    z-index: 1000;
     font-family: var(--font-main);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
@@ -563,6 +563,7 @@ svg {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
 }
 
 .mobile-menu.is-active {
@@ -576,6 +577,19 @@ svg {
     padding: 14px 24px;
     border-bottom: 1px solid var(--color-bg-light);
     flex-shrink: 0;
+    display: none;
+}
+
+.mobile-menu__partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.mobile-menu__partners img {
+    height: 32px;
+    width: auto;
 }
 
 .mobile-menu__logo {
@@ -755,6 +769,7 @@ svg {
 
     .header__top-left {
         gap: 24px;
+        order: 1;
     }
 
     .header__logo {
@@ -764,6 +779,7 @@ svg {
     .header__partners {
         gap: 18px;
         height: 27px;
+        display: none;
     }
 
     .header__top-nav {
@@ -772,16 +788,26 @@ svg {
 
     .header__top-right {
         gap: 24px;
+        display: contents;
+    }
+
+    .header__search {
+        display: flex;
+        flex: 1;
+        max-width: 320px;
+        margin: 0 20px;
+        order: 2;
     }
 
     .header__search-input {
-        max-width: 176px;
+        max-width: 100%;
         height: 39px;
     }
 
     .header__search-btn {
         width: 39px;
         height: 39px;
+        flex-shrink: 0;
     }
 
     .header__search-btn svg {
@@ -790,6 +816,7 @@ svg {
     }
 
     .header__burger {
+        order: 3;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -801,7 +828,22 @@ svg {
         border-radius: 8px;
         background: transparent;
         cursor: pointer;
+        z-index: 1001;
+        /* Бургер клікабельний поверх усього */
         transition: background 0.3s ease;
+    }
+
+    /* Анімація бургера в хрестик при відкритому меню */
+    .header__burger.is-active span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .header__burger.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .header__burger.is-active span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
     }
 
     .header__burger:hover {
@@ -828,6 +870,18 @@ svg {
     .header__phone {
         display: none;
     }
+
+    .header__bottom {
+        display: none;
+        /* Ховаємо нижню панель повністю */
+    }
+
+    .header__top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 /* Адаптив: Узкий планшет (768px - 992px) */
@@ -847,10 +901,6 @@ svg {
     .header__partners {
         gap: 10px;
     }
-
-    .header__search-input {
-        max-width: 130px;
-    }
 }
 
 /* Адаптив: Мобильные (до 767px) */
@@ -863,13 +913,25 @@ svg {
         padding: 14px 0;
     }
 
-    .header__partners,
-    .header__search {
+    .header__partners {
         display: none;
     }
 
     .header__bottom {
         display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .header__search {
+        order: 4;
+        max-width: 100%;
+        flex-basis: 100%;
+        margin: 15px 0 0 0;
+    }
+
+    .mobile-menu {
+        padding-top: 120px;
     }
 }
 
@@ -881,7 +943,7 @@ svg {
     height: 654px;
     display: flex;
     align-items: center;
-    background-color: #0D621A;
+    background-color: var(--color-bg-light);
     overflow: hidden;
 }
 
@@ -889,7 +951,10 @@ svg {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
+    max-width: 1920px;
     height: 100%;
     z-index: 1;
 }
@@ -913,7 +978,10 @@ svg {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
+    max-width: 1920px;
     height: 100%;
     background: linear-gradient(271.28deg, rgba(11, 104, 26, 0) 43.79%, rgba(17, 119, 33, 0.6205) 54.15%, rgba(13, 98, 26, 0.8075) 71.75%, rgba(12, 78, 22, 0.7735) 99.05%);
     z-index: 2;
@@ -1944,7 +2012,6 @@ svg {
 
 .loans__tooltip-close {
     display: none;
-    /* Скрыт на ПК */
     position: absolute;
     top: 10px;
     right: 10px;
@@ -1952,6 +2019,15 @@ svg {
     border: none;
     cursor: pointer;
     padding: 5px;
+    outline: none;
+    /* Прибираємо стандартний аутлайн */
+    -webkit-tap-highlight-color: transparent;
+    /* Прибираємо спалах при тапі на мобілках */
+}
+
+.loans__tooltip-close:focus,
+.loans__tooltip-close:active {
+    outline: none;
 }
 
 .loans__tooltip-icon {
@@ -2277,17 +2353,8 @@ svg {
     top: 50%;
     transform: translateY(-50%);
     left: 650px;
-    width: 31vw;
-    height: auto;
-    z-index: 2;
-}
-
-.qualifications__img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 650px;
-    width: 31vw;
+    width: 100%;
+    max-width: 596px;
     height: auto;
     z-index: 2;
 }
@@ -2377,7 +2444,7 @@ svg {
 
     .qualifications__img {
         left: 515px;
-        width: 34vw;
+        max-width: 349px;
     }
 }
 
@@ -2527,9 +2594,18 @@ svg {
         margin-bottom: 40px;
     }
 
+    /* Змінюємо grid на flex для гарного переносу і центрування */
     .application__grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 32px;
-        /* Зменшуємо гап на планшеті */
+    }
+
+    /* Задаємо ширину для карток (2 в ряд мінус відступ) та максимальну ширину */
+    .application__card {
+        width: calc(50% - 16px);
+        max-width: 436px;
     }
 
     .application__card-title {
@@ -2537,11 +2613,8 @@ svg {
         line-height: 28px;
     }
 
-    /* .application__card-text залишається 16px за ТЗ */
-
     .application__btn {
         width: 100%;
-        /* На планшеті розтягуємо кнопку */
         text-align: center;
     }
 }
@@ -2551,19 +2624,23 @@ svg {
     /* Application Process - Мобілка */
     .application {
         padding: 60px 0;
-        /* За ТЗ тут теж 60px */
     }
 
     .application__title {
         font-size: 32px;
-        /* line-height: 55px; - успадковується від планшета */
     }
 
+    /* Вибудовуємо картки в одну колонку */
     .application__grid {
-        grid-template-columns: 1fr;
-        /* Одна колонка */
+        display: flex;
+        flex-direction: column;
         gap: 80px;
-        /* Повертаємо гап 80px між картками */
+    }
+
+    /* Скидаємо обмеження ширини для мобілок */
+    .application__card {
+        width: 100%;
+        max-width: 100%;
     }
 }
 

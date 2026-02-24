@@ -20,25 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // Мобильное меню
+    // Мобильное меню (Оновлено)
     // =========================================
     const burgerBtn = document.querySelector('.header__burger');
-    const closeBtn = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    if (burgerBtn && closeBtn && mobileMenu) {
-        // Открытие меню
+    if (burgerBtn && mobileMenu) {
+        // Використовуємо бургер для відкриття/закриття
         burgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('is-active');
-            // Блокируем скролл на body
-            document.body.style.overflow = 'hidden';
-        });
+            const isActive = mobileMenu.classList.toggle('is-active');
+            burgerBtn.classList.toggle('is-active'); // Цей клас запустить анімацію перетворення на хрестик
 
-        // Закрытие меню
-        closeBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('is-active');
-            // Возвращаем скролл
-            document.body.style.overflow = '';
+            if (isActive) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
     }
 
@@ -282,77 +279,98 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltipTextContainer = document.getElementById('tooltip-text');
     const tooltipElement = document.getElementById('dynamic-tooltip');
     const tooltipCloseBtn = document.getElementById('tooltip-close');
-    const loansSection = document.getElementById('loans-section');
+    const loansSection = document.getElementById('loans-section');// Беремо хедер для розрахунку відступів
 
     if (loanItems.length > 0 && tooltipTextContainer && loansSection) {
 
-        // Флаг для отслеживания ручного закрытия
         let tooltipClosedManually = false;
+        let isHovered = false; // Флаг, щоб скрол не конфліктував з наведенням миші
 
-        // Функция обновления контента
+        // Функція оновлення контенту
         const updateTooltip = (item) => {
-            // Убираем класс у всех
+            if (item.classList.contains('is-active')) return; // Не оновлюємо, якщо вже активний (уникаємо зайвих перемалювань DOM)
+
             loanItems.forEach(el => el.classList.remove('is-active'));
-            // Добавляем текущему
             item.classList.add('is-active');
-            // Обновляем текст
             tooltipTextContainer.innerHTML = item.getAttribute('data-tooltip');
         };
 
-        // Обработчики для каждого блока
+        // Обробники для ПК та мобілок
         loanItems.forEach(item => {
-            // Для ПК: смена по наведению
+            // Для ПК: зміна по ховеру
             item.addEventListener('mouseenter', () => {
+                isHovered = true;
                 if (window.innerWidth > 767) {
                     updateTooltip(item);
                 }
             });
 
-            // Для Мобилок: смена и открытие по клику
+            item.addEventListener('mouseleave', () => {
+                isHovered = false;
+            });
+
+            // Для мобілок: клік
             item.addEventListener('click', (e) => {
                 if (window.innerWidth <= 767) {
-                    e.preventDefault(); // Если внутри ссылка
+                    e.preventDefault();
                     updateTooltip(item);
                     tooltipElement.classList.add('is-visible');
-                    // Сбрасываем флаг, так как пользователь сам захотел открыть тултип
                     tooltipClosedManually = false;
                 }
             });
         });
 
-        // Закрытие мобильного тултипа по крестику
+        // Закриття мобільного тултіпа по хрестику
         if (tooltipCloseBtn) {
             tooltipCloseBtn.addEventListener('click', () => {
                 tooltipElement.classList.remove('is-visible');
-                // Запоминаем, что юзер закрыл его, чтобы он не прыгал обратно при скролле
                 tooltipClosedManually = true;
             });
         }
 
-        // Логика автоматического показа/скрытия при скролле (только для мобилок)
+        // Логіка автоматичного перемикання при скролі
         window.addEventListener('scroll', () => {
+            // 1. Автоперемикання контенту (працює на всіх екранах)
+            if (!isHovered) {
+                const headerHeight = header ? header.offsetHeight : 100;
+                let activeItem = null;
+
+                // Шукаємо перший елемент, який ще не сховався повністю під хедером
+                for (let i = 0; i < loanItems.length; i++) {
+                    const rect = loanItems[i].getBoundingClientRect();
+                    // Якщо нижня межа елемента нижче хедера + 50px (умовно половина) — вважаємо його поточним
+                    if (rect.bottom > headerHeight + 50) {
+                        activeItem = loanItems[i];
+                        break;
+                    }
+                }
+
+                // Оновлюємо тултіп лише якщо ми знаходимось в межах секції
+                const sectionRect = loansSection.getBoundingClientRect();
+                const inSectionView = sectionRect.top < window.innerHeight && sectionRect.bottom > headerHeight;
+
+                if (activeItem && inSectionView) {
+                    updateTooltip(activeItem);
+                }
+            }
+
+            // 2. Логіка показу/сховування самої плашки тултіпа (лише для мобілок)
             if (window.innerWidth <= 767) {
                 const sectionRect = loansSection.getBoundingClientRect();
-
-                // Проверяем, находится ли секция в зоне видимости
-                // offset 100px - чтобы тултип появлялся/исчезал не по первому же пикселю секции
                 const inView = (sectionRect.top < window.innerHeight - 100) && (sectionRect.bottom > 100);
 
                 if (inView) {
-                    // Если секция на экране, и юзер не закрывал тултип руками — показываем
                     if (!tooltipElement.classList.contains('is-visible') && !tooltipClosedManually) {
                         tooltipElement.classList.add('is-visible');
                     }
                 } else {
-                    // Если вышли за пределы секции — скрываем
                     if (tooltipElement.classList.contains('is-visible')) {
                         tooltipElement.classList.remove('is-visible');
                     }
-                    // Сбрасываем ручное закрытие. Если юзер вернется к секции позже, тултип снова покажется
                     tooltipClosedManually = false;
                 }
             }
-        });
+        }, { passive: true }); // passive: true для плавності скролу
     }
 
     // =========================================
