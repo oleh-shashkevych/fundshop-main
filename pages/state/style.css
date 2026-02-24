@@ -594,14 +594,30 @@ svg {
 }
 
 /* =========================================
-   Стилі форми (Клон з Попапу Головної)
+   Стилі покрокової форми
    ========================================= */
-.popup__top {
+.hero-form__step {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-form__top {
     padding: 44px 24px 24px;
     background: var(--color-white);
 }
 
-.popup__title {
+.hero-form__title {
     font-weight: 500;
     font-size: 21px;
     line-height: 35px;
@@ -610,7 +626,7 @@ svg {
     margin-bottom: 17px;
 }
 
-.popup__subtitle {
+.hero-form__subtitle {
     font-weight: 300;
     font-size: 18px;
     line-height: 35px;
@@ -624,7 +640,7 @@ svg {
     color: #106C1E;
 }
 
-.popup__grid {
+.hero-form__inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px 24px;
@@ -716,34 +732,53 @@ svg {
     width: 100%;
 }
 
-.popup__actions-top {
+.hero-form__actions-top {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 24px;
 }
 
-.popup__reset,
-.popup__disclosure {
+.hero-form__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EAF5EC;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+}
+
+.hero-form__back:hover {
+    background: #D0F9D2;
+}
+
+.hero-form__reset,
+.hero-form__disclosure {
     font-weight: 400;
     font-size: 14px;
     color: var(--color-accent);
     text-decoration: none;
     transition: opacity 0.3s ease;
+    background: none;
 }
 
-.popup__reset:hover,
-.popup__disclosure:hover {
+.hero-form__reset:hover,
+.hero-form__disclosure:hover {
     opacity: 0.7;
 }
 
-.popup__divider {
+.hero-form__divider {
     width: 1px;
     height: 16px;
     background: #CFCFCF;
 }
 
-.popup__bottom {
+.hero-form__bottom {
     background: #F5F8F5;
     padding: 24px 32px 44px;
     display: flex;
@@ -751,42 +786,42 @@ svg {
     align-items: center;
 }
 
-.popup__calc-label {
+.hero-form__calc-label {
     font-weight: 300;
     font-size: 15.26px;
     margin-bottom: 10px;
 }
 
-.popup__calc-result {
+.hero-form__calc-result {
     font-weight: 600;
     font-size: 32px;
     color: #0D8620;
     margin-bottom: 14px;
 }
 
-.popup__info {
+.hero-form__info {
     display: flex;
     align-items: flex-start;
     gap: 14px;
     margin-bottom: 32px;
 }
 
-.popup__info svg {
+.hero-form__info svg {
     flex-shrink: 0;
 }
 
-.popup__info p {
+.hero-form__info p {
     font-weight: 300;
     font-size: 12px;
     line-height: 18px;
     color: #696A6C;
 }
 
-.popup__info a {
+.hero-form__info a {
     text-decoration: underline;
 }
 
-.popup__submit {
+.hero-form__submit {
     width: 100%;
     max-width: 278px;
     height: 50px;
@@ -801,18 +836,56 @@ svg {
     color: var(--color-text-main);
     text-transform: uppercase;
     transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.popup__submit:hover {
+.hero-form__submit:hover {
     background: #50cc48;
 }
 
-.popup__success-msg {
+.hero-form__success-msg {
     color: #0D8620;
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+/* Адаптив форми для мобілок (можеш додати це в кінець файлу або у свій існуючий @media (max-width: 767px) ) */
+@media (max-width: 767px) {
+    .hero-form__top {
+        padding: 30px 20px 20px;
+    }
+
+    .hero-form__bottom {
+        padding: 24px 20px 30px;
+    }
+
+    .hero-form__inputs {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .hero-form__actions-top {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hero-form__divider {
+        display: none;
+    }
+
+    .hero-form__title {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .hero-form__subtitle {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
 }
 
 /* =========================================
@@ -946,41 +1019,6 @@ svg {
         flex-wrap: wrap;
         /* Разрешаем перенос логотипов, если не влезут */
         gap: 20px;
-    }
-
-    /* Адаптив самой формы (перестраиваем инпуты в 1 колонку) */
-    .popup__top {
-        padding: 30px 20px 20px;
-    }
-
-    .popup__bottom {
-        padding: 24px 20px 30px;
-    }
-
-    .popup__grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .popup__actions-top {
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .popup__divider {
-        display: none;
-        /* Убираем вертикальную черту между ссылками */
-    }
-
-    .popup__title {
-        font-size: 18px;
-        line-height: 28px;
-    }
-
-    .popup__subtitle {
-        font-size: 16px;
-        line-height: 24px;
-        margin-bottom: 30px;
     }
 }
 

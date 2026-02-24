@@ -54,9 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // Логіка Форми Hero та Калькулятора
+    // Логіка Покрокової Форми та Калькулятора
     // =========================================
     const form = document.getElementById('funding-form');
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+
+    const nextStepBtn = document.getElementById('next-step-btn');
+    const prevStepBtn = document.getElementById('prev-step-btn');
     const resetBtn = document.getElementById('reset-calc');
 
     // Елементи калькулятора
@@ -65,10 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const calcResultEl = document.getElementById('calc-result');
     const defaultResult = "$0 - $10,000";
 
-    // Константи для формули
     const PERCENT_1 = 0.60;
     const PERCENT_2 = 1.50;
     const MONTHS = 12;
+
+    // Плавний скрол до форми
+    const scrollBtns = document.querySelectorAll('.js-scroll-to-form');
+    if (scrollBtns.length > 0) {
+        scrollBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const formSection = document.getElementById('hero-section');
+                if (formSection) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const y = formSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+
+                    // Закриваємо мобільне меню, якщо скрол відбувся з нього
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    const burgerBtn = document.querySelector('.header__burger');
+                    if (mobileMenu && mobileMenu.classList.contains('is-active')) {
+                        mobileMenu.classList.remove('is-active');
+                        burgerBtn.classList.remove('is-active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        });
+    }
 
     if (form) {
         // --- Маски IMask ---
@@ -103,11 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const sum2 = Math.round(x * PERCENT_2);
 
             const formatSum = (num) => '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
             calcResultEl.textContent = `${formatSum(sum1)} - ${formatSum(sum2)}`;
         };
 
-        if (revenueInput) {
+        if (revenueInput && revenueMask) {
             revenueMask.on('accept', updateCalculator);
         }
 
@@ -118,10 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (phoneMask) phoneMask.value = '';
             calcResultEl.textContent = defaultResult;
 
-            const errorElements = form.querySelectorAll('.just-validate-error-label');
-            errorElements.forEach(el => el.remove());
-            const errorInputs = form.querySelectorAll('.just-validate-error-field');
-            errorInputs.forEach(el => el.classList.remove('just-validate-error-field'));
+            // Повертаємо на 1-й крок
+            step2.style.display = 'none';
+            step2.classList.remove('is-active');
+            step1.style.display = 'block';
+            step1.classList.add('is-active');
+
+            if (window.validator) {
+                window.validator.refresh();
+            }
 
             const successMsg = document.getElementById('form-success-msg');
             if (successMsg) successMsg.style.display = 'none';
@@ -129,123 +162,147 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (resetBtn) resetBtn.addEventListener('click', resetForm);
 
-        // --- Валідація і Відправка (JustValidate) ---
+        // --- Перехід назад ---
+        if (prevStepBtn) {
+            prevStepBtn.addEventListener('click', () => {
+                step2.style.display = 'none';
+                step2.classList.remove('is-active');
+                step1.style.display = 'block';
+                step1.classList.add('is-active');
+            });
+        }
+
+        // --- Валідація JustValidate ---
         if (typeof window.JustValidate !== 'undefined') {
-            const validator = new window.JustValidate('#funding-form', {
+            window.validator = new window.JustValidate('#funding-form', {
                 errorFieldCssClass: 'just-validate-error-field',
                 errorLabelCssClass: 'just-validate-error-label',
-                focusInvalidField: true, // Автоматичний фокус на першому невалідному полі
-                lockForm: true, // Блокує кнопку під час відправки
+                focusInvalidField: true,
+                lockForm: true,
             });
 
-            validator
-                // Текстові поля
-                .addField('#first-name', [
-                    { rule: 'required', errorMessage: 'First Name is required' },
-                    { rule: 'minLength', value: 2, errorMessage: 'Name is too short' }
-                ])
-                .addField('#last-name', [
-                    { rule: 'required', errorMessage: 'Last Name is required' },
-                    { rule: 'minLength', value: 2, errorMessage: 'Name is too short' }
-                ])
-                .addField('#company-name', [
-                    { rule: 'required', errorMessage: 'Company Name is required' }
-                ])
-
-                // Email та Сайт
-                .addField('#email', [
-                    { rule: 'required', errorMessage: 'Email is required' },
-                    { rule: 'email', errorMessage: 'Please enter a valid email address' }
-                ])
-                .addField('#website', [
-                    { rule: 'required', errorMessage: 'Website is required' },
-                    // Допускаємо формати з http/https і без них
-                    { rule: 'customRegexp', value: /^(https?:\/\/)?([\w\d-]+\.)+[\w\d]{2,}(\/.*)?$/i, errorMessage: 'Enter a valid website URL' }
-                ])
-
-                // Телефон (перевіряємо чистий номер без маски)
-                .addField('#phone', [
-                    { rule: 'required', errorMessage: 'Phone number is required' },
-                    {
-                        validator: () => phoneMask && phoneMask.unmaskedValue.length === 10,
-                        errorMessage: 'Phone number must be exactly 10 digits'
-                    }
-                ])
-
-                // Дохід (перевіряємо розмасковане значення)
+            window.validator
+                // --- КРОК 1 ---
                 .addField('#annual-revenue', [
-                    { rule: 'required', errorMessage: 'Annual Revenue is required' },
+                    { rule: 'required', errorMessage: 'Required' },
                     {
                         validator: () => {
                             const val = revenueMask ? parseInt(revenueMask.unmaskedValue, 10) : 0;
                             return val > 0;
                         },
-                        errorMessage: 'Revenue must be greater than $0'
+                        errorMessage: 'Must be > $0'
                     }
                 ])
+                .addField('#amount-requested', [{ rule: 'required', errorMessage: 'Required' }])
+                .addField('#credit-score', [{ rule: 'required', errorMessage: 'Required' }])
+                .addField('#industry-type', [{ rule: 'required', errorMessage: 'Required' }])
 
-                // Селекти (випадаючі списки)
-                .addField('#state', [
-                    { rule: 'required', errorMessage: 'Please select a State' }
+                // --- КРОК 2 ---
+                .addField('#first-name', [
+                    { rule: 'required', errorMessage: 'Required' },
+                    { rule: 'minLength', value: 2, errorMessage: 'Too short' }
                 ])
-                .addField('#amount-requested', [
-                    { rule: 'required', errorMessage: 'Please select an amount' }
+                .addField('#last-name', [
+                    { rule: 'required', errorMessage: 'Required' },
+                    { rule: 'minLength', value: 2, errorMessage: 'Too short' }
                 ])
-                .addField('#credit-score', [
-                    { rule: 'required', errorMessage: 'Please select your credit score' }
+                .addField('#company-name', [{ rule: 'required', errorMessage: 'Required' }])
+                .addField('#phone', [
+                    { rule: 'required', errorMessage: 'Required' },
+                    {
+                        validator: () => phoneMask && phoneMask.unmaskedValue.length === 10,
+                        errorMessage: 'Must be 10 digits'
+                    }
                 ])
-                .addField('#industry-type', [
-                    { rule: 'required', errorMessage: 'Please select your industry' }
+                .addField('#email', [
+                    { rule: 'required', errorMessage: 'Required' },
+                    { rule: 'email', errorMessage: 'Invalid email' }
                 ])
+                .addField('#state', [{ rule: 'required', errorMessage: 'Required' }])
+                .addField('#website', [
+                    { rule: 'required', errorMessage: 'Required' },
+                    { rule: 'customRegexp', value: /^(https?:\/\/)?([\w\d-]+\.)+[\w\d]{2,}(\/.*)?$/i, errorMessage: 'Invalid URL' }
+                ]);
 
-                // Якщо всі поля валідні — виконується цей блок
-                .onSuccess((event) => {
-                    event.preventDefault();
+            // Логіка кнопки переходу
+            if (nextStepBtn) {
+                nextStepBtn.addEventListener('click', async () => {
+                    const fieldsToValidate = ['#annual-revenue', '#amount-requested', '#credit-score', '#industry-type'];
+                    let isValid = true;
 
-                    const formData = new FormData(form);
-                    const dataObj = Object.fromEntries(formData.entries());
+                    for (const field of fieldsToValidate) {
+                        const fieldValid = await window.validator.revalidateField(field);
+                        if (!fieldValid) isValid = false;
+                    }
 
-                    // Додаємо чисті значення без форматування для бекенду
-                    dataObj.phoneUnmasked = phoneMask.unmaskedValue;
-                    dataObj.revenueUnmasked = revenueMask.unmaskedValue;
-                    dataObj.calculatorResult = calcResultEl.textContent;
-
-                    const payloadArray = [dataObj];
-                    console.log('--- Form Validated & Prepared ---', payloadArray);
-
-                    const submitBtn = document.getElementById('submit-btn');
-                    const successMsg = document.getElementById('form-success-msg');
-                    const originalBtnText = submitBtn.innerHTML;
-
-                    submitBtn.innerHTML = 'SENDING...';
-                    submitBtn.disabled = true;
-
-                    // Імітація запиту
-                    fetch('https://jsonplaceholder.typicode.com/posts', {
-                        method: 'POST',
-                        body: JSON.stringify(payloadArray),
-                        headers: { 'Content-type': 'application/json; charset=UTF-8' }
-                    })
-                        .then(response => response.json())
-                        .then(json => {
-                            submitBtn.innerHTML = originalBtnText;
-                            submitBtn.disabled = false;
-                            successMsg.innerHTML = `Application submitted successfully!<br><span style="font-size: 12px; color: #666;">Server Response ID: ${json.id}</span>`;
-                            successMsg.style.display = 'block';
-
-                            setTimeout(() => {
-                                resetForm();
-                                // Якщо ти використовуєш попап, тут викликається closePopup();
-                            }, 3000);
-                        })
-                        .catch(err => {
-                            submitBtn.innerHTML = originalBtnText;
-                            submitBtn.disabled = false;
-                            successMsg.innerHTML = 'Error submitting application. Try again.';
-                            successMsg.style.color = '#FF3B30';
-                            successMsg.style.display = 'block';
-                        });
+                    if (isValid) {
+                        step1.style.display = 'none';
+                        step1.classList.remove('is-active');
+                        step2.style.display = 'block';
+                        setTimeout(() => step2.classList.add('is-active'), 10);
+                    }
                 });
+            }
+
+            // Real-time валідація при введенні
+            const formInputs = form.querySelectorAll('input, select');
+            formInputs.forEach(input => {
+                const eventName = input.tagName.toLowerCase() === 'select' ? 'change' : 'input';
+                input.addEventListener(eventName, () => {
+                    if (window.validator && input.id) {
+                        const hasError = input.classList.contains('just-validate-error-field');
+                        if (hasError) {
+                            window.validator.revalidateField('#' + input.id).catch(() => { });
+                        }
+                    }
+                });
+            });
+
+            // Відправка
+            window.validator.onSuccess((event) => {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                const dataObj = Object.fromEntries(formData.entries());
+
+                dataObj.phoneUnmasked = phoneMask ? phoneMask.unmaskedValue : '';
+                dataObj.revenueUnmasked = revenueMask ? revenueMask.unmaskedValue : '';
+                dataObj.calculatorResult = calcResultEl.textContent;
+
+                const payloadArray = [dataObj];
+                console.log('--- Form Validated & Prepared ---', payloadArray);
+
+                const submitBtn = document.getElementById('submit-btn');
+                const successMsg = document.getElementById('form-success-msg');
+                const originalBtnText = submitBtn.innerHTML;
+
+                submitBtn.innerHTML = 'SENDING...';
+                submitBtn.disabled = true;
+
+                fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method: 'POST',
+                    body: JSON.stringify(payloadArray),
+                    headers: { 'Content-type': 'application/json; charset=UTF-8' }
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        successMsg.innerHTML = `Application submitted successfully!<br><span style="font-size: 12px; color: #666;">Server Response ID: ${json.id}</span>`;
+                        successMsg.style.display = 'block';
+
+                        setTimeout(() => {
+                            resetForm();
+                        }, 3000);
+                    })
+                    .catch(err => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        successMsg.innerHTML = 'Error submitting application. Try again.';
+                        successMsg.style.color = '#FF3B30';
+                        successMsg.style.display = 'block';
+                    });
+            });
         }
     }
 
