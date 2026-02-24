@@ -5,6 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
 
     if (header) {
+        const checkScroll = () => {
+            if (window.scrollY > 10) {
+                header.classList.add('is-scrolled');
+            } else {
+                header.classList.remove('is-scrolled');
+            }
+        };
+
+        // Проверяем при загрузке
+        checkScroll();
+
+        // Проверяем при скролле
+        window.addEventListener('scroll', checkScroll);
+    }
+
+    if (header) {
         // Создаем наблюдатель, который следит за изменениями размеров хедера
         const headerResizeObserver = new ResizeObserver((entries) => {
             for (let entry of entries) {
@@ -48,14 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hero Слайдер
     // =========================================
     const slides = document.querySelectorAll('.hero__slide');
-    if (slides.length > 0) {
-        let currentSlide = 0;
-        setInterval(() => {
-            slides[currentSlide].classList.remove('is-active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('is-active');
-        }, 5000); // Смена каждые 5 секунд
-    }
+    let sliderInterval;
+
+    const initSlider = () => {
+        // Запускаємо слайдер тільки якщо є слайди і ширина вікна більша за 992px
+        if (slides.length > 0 && window.innerWidth > 992) {
+            if (!sliderInterval) {
+                let currentSlide = 0;
+                sliderInterval = setInterval(() => {
+                    slides[currentSlide].classList.remove('is-active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('is-active');
+                }, 5000); // Зміна кожні 5 секунд
+            }
+        } else {
+            // Зупиняємо слайдер, якщо ширина 992px або менше
+            if (sliderInterval) {
+                clearInterval(sliderInterval);
+                sliderInterval = null;
+            }
+        }
+    };
+
+    // Ініціалізація при завантаженні сторінки
+    initSlider();
+
+    // Відстеження зміни розміру вікна
+    window.addEventListener('resize', initSlider);
 
     // =========================================
     // Логіка Покрокової Форми (Hero)

@@ -225,6 +225,19 @@ svg {
     z-index: 1000;
     font-family: var(--font-main);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+}
+
+/* Эффект матового стекла при скролле */
+.header.is-scrolled {
+    background-color: rgba(255, 255, 255, 0.85);
+    /* Полупрозрачный белый */
+    backdrop-filter: blur(12px);
+    /* Размытие фона под хедером */
+    -webkit-backdrop-filter: blur(12px);
+    /* Для Safari */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* Легкая линия снизу */
 }
 
 .header__container {
@@ -462,6 +475,10 @@ svg {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.mega-menu__list--green a:hover {
+    color: #4A4A4A;
 }
 
 .mega-menu__list--green img {
@@ -936,12 +953,30 @@ svg {
    ========================================= */
 .hero {
     position: relative;
-    min-height: 750px;
-    padding: 130px 0 90px;
+    padding: 40px 0;
+    min-height: 915px;
     display: flex;
     align-items: center;
-    background-color: var(--color-bg-light);
+    background-image: linear-gradient(271.06deg, #0B681A 1.09%, #0D621A 52.51%, #0C4E16 99.21%);
     overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.15;
+    /* Регулируй прозрачность линий здесь */
+
+    /* Встроенный SVG прямо в CSS */
+    background-image: url(../img/state-hero-bg.svg);
+    background-size: cover;
+    /* Или можешь поставить 800px чтобы узор повторялся */
+    background-position: center;
 }
 
 .hero__slider {
@@ -1313,7 +1348,7 @@ svg {
    ========================================= */
 @media (max-width: 1200px) {
     .hero {
-        padding: 110px 0 70px;
+        padding: 40px 0;
         min-height: auto;
     }
 
@@ -1336,7 +1371,6 @@ svg {
     .hero {
         flex-direction: column;
         padding: 0 0 60px 0;
-        background-color: #0D621A;
     }
 
     .hero__overlay {
@@ -1348,16 +1382,17 @@ svg {
     }
 
     .hero__left {
-        background-color: #0D621A;
         padding: 32px 24px;
         width: 100%;
         max-width: 700px;
         margin: 0 auto;
+        order: 1;
     }
 
     .hero__grid {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 20px;
+        padding-top: 40px;
     }
 
     .hero__title {
@@ -1377,6 +1412,7 @@ svg {
         position: relative;
         height: auto;
         aspect-ratio: 400 / 185;
+        display: none;
     }
 }
 

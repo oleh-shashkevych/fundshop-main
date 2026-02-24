@@ -277,9 +277,7 @@ svg {
 }
 
 @media (max-width: 992px) {
-
-    /* Прячем текст телефона на узком планшете, оставляем только иконку */
-    .header__phone-text {
+    .header__phone-desc {
         display: none;
     }
 
@@ -290,6 +288,10 @@ svg {
 }
 
 @media (max-width: 767px) {
+    .header__phone-text {
+        display: none;
+    }
+
     .header__inner {
         height: 70px;
     }
@@ -458,8 +460,8 @@ svg {
    ========================================= */
 .state-hero {
     position: relative;
-    padding: 130px 0 90px;
-    min-height: 100vh;
+    padding: 40px 0;
+    min-height: 915px;
     display: flex;
     align-items: center;
     /* 1. Базовый сплошной фон (самый нижний слой) */
@@ -478,12 +480,15 @@ svg {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('img/state-hero-bg.webp') center/cover no-repeat;
-    filter: invert(1);
-    opacity: 0.12;
-    /* Точные 12% из Фигмы */
     z-index: -2;
-    /* Кладем под контент */
+    opacity: 0.15;
+    /* Регулируй прозрачность линий здесь */
+
+    /* Встроенный SVG прямо в CSS */
+    background-image: url(img/state-hero-bg.svg);
+    background-size: cover;
+    /* Или можешь поставить 800px чтобы узор повторялся */
+    background-position: center;
 }
 
 /* 3. Верхние полупрозрачные градиенты-оверлеи */
@@ -896,8 +901,7 @@ svg {
 
     /* Планшет: сужаем отступы и шрифты, оставляем 2 колонки */
     .state-hero {
-        padding: 110px 0 70px;
-        min-height: auto;
+        padding: 40px 0;
     }
 
     .state-hero__grid {
