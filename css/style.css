@@ -1443,7 +1443,6 @@ svg {
 
     .hero-form__inputs {
         grid-template-columns: 1fr;
-        gap: 14px;
     }
 
     .hero-form__actions-top {
