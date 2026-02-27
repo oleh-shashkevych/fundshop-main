@@ -220,26 +220,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 ])
                 .addField('#state', [{ rule: 'required', errorMessage: 'Required' }])
                 .addField('#website', [
-                    { rule: 'required', errorMessage: 'Required' },
-                    { rule: 'customRegexp', value: /^(https?:\/\/)?([\w\d-]+\.)+[\w\d]{2,}(\/.*)?$/i, errorMessage: 'Invalid URL' }
+                    {
+                        validator: (value) => {
+                            // Якщо поле порожнє — пропускаємо (робимо опціональним)
+                            if (!value) return true;
+                            // Якщо заповнене — перевіряємо регулярним виразом
+                            return /^(https?:\/\/)?([\w\d-]+\.)+[\w\d]{2,}(\/.*)?$/i.test(value);
+                        },
+                        errorMessage: 'Invalid URL'
+                    }
                 ]);
 
-            // Логіка кнопки переходу
+            // Логіка кнопки переходу на 2-й крок
             if (nextStepBtn) {
                 nextStepBtn.addEventListener('click', async () => {
+                    // Примусово валідуємо ТІЛЬКИ поля 1-го кроку перед переходом
                     const fieldsToValidate = ['#annual-revenue', '#amount-requested', '#credit-score', '#industry-type'];
                     let isValid = true;
+                    let firstInvalidField = null; // Змінна для збереження першого поля з помилкою
 
+                    // Перевіряємо кожне поле
                     for (const field of fieldsToValidate) {
                         const fieldValid = await window.validator.revalidateField(field);
-                        if (!fieldValid) isValid = false;
+                        if (!fieldValid) {
+                            isValid = false;
+                            if (!firstInvalidField) {
+                                firstInvalidField = document.querySelector(field);
+                            }
+                        }
                     }
 
                     if (isValid) {
+                        // Анімація переходу на другий крок
                         step1.style.display = 'none';
                         step1.classList.remove('is-active');
                         step2.style.display = 'block';
                         setTimeout(() => step2.classList.add('is-active'), 10);
+                    } else if (firstInvalidField) {
+                        // Якщо є помилки, плавно скролимо до першого невалідного поля
+                        const header = document.querySelector('.header');
+                        const headerHeight = header ? header.offsetHeight : 100;
+
+                        // Знаходимо батьківський .input-group, щоб лейбл також гарантовано потрапив в екран
+                        const group = firstInvalidField.closest('.input-group') || firstInvalidField;
+
+                        const y = group.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
                     }
                 });
             }
