@@ -748,8 +748,8 @@ svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #EAF5EC;
-    border-radius: 50%;
+    background: #F5F8F5;
+    border-radius: 3px;
     width: 32px;
     height: 32px;
     border: none;
@@ -760,6 +760,11 @@ svg {
 
 .hero-form__back:hover {
     background: #D0F9D2;
+    color: var(--color-accent);
+}
+
+.hero-form__back path {
+    transition: all .3s ease;
 }
 
 .hero-form__reset,
@@ -1978,12 +1983,12 @@ svg {
     }
 
     .footer__info {
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: start;
     }
 
     .footer__logo {
-        margin-left: auto;
+        margin-left: unset;
         margin-right: auto;
     }
 
