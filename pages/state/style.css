@@ -778,7 +778,9 @@ svg {
     justify-content: center;
     background: #F5F8F5;
     border-radius: 3px;
-    width: 32px;
+    width: auto;
+    padding: 0 16px 0 8px;
+    gap: 4px;
     height: 32px;
     border: none;
     cursor: pointer;
