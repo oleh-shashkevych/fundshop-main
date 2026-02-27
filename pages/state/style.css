@@ -581,10 +581,38 @@ svg {
     gap: 44px;
 }
 
+.state-hero__certs-logos a {
+    height: 67px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 .state-hero__certs-logos img {
     height: 67px;
     width: auto;
     object-fit: contain;
+    /* Чтобы картинки не плющило при сужении */
+}
+
+.state-hero__certs-logos a svg {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    /* плавность */
+}
+
+.state-hero__certs-logos a svg path {
+    fill: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+/* При наведении на ссылку меняем fill у всех path внутри SVG */
+.state-hero__certs-logos a:hover svg path {
+    fill: #64E05B;
+    /* Зеленый цвет твоего логотипа */
+    transition: fill 0.3s ease;
 }
 
 /* --- Права частина (Форма) --- */
@@ -1942,10 +1970,38 @@ svg {
     gap: 32px;
 }
 
-.footer__partners img {
-    height: 37px;
+.footer__partners a {
+    display: flex;
+    height: 100%;
     width: auto;
-    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer__partners img {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+    /* Чтобы картинки не плющило при сужении */
+}
+
+.footer__partners a svg {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    /* плавность */
+}
+
+.footer__partners a svg path {
+    fill: #696A6CE5;
+    transition: all 0.3s ease;
+}
+
+/* При наведении на ссылку меняем fill у всех path внутри SVG */
+.footer__partners a:hover svg path {
+    fill: #108823;
+    /* Зеленый цвет твоего логотипа */
+    transition: fill 0.3s ease;
 }
 
 /* --- Копірайт --- */
