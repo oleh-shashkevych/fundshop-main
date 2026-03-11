@@ -2076,3 +2076,178 @@ svg {
         gap: 40px;
     }
 }
+
+/* =========================================
+   Success State (Form Submit)
+   ========================================= */
+.success-state {
+    background: #FAFAFA;
+    border-radius: 8px;
+    box-shadow: 0px 4.07px 15px 0px rgba(35, 35, 35, 0.14);
+    width: 100%;
+}
+
+.success-state__top {
+    padding: 44px 24px;
+    text-align: center;
+    opacity: 0;
+    /* Для анімації */
+}
+
+.success-state__icon {
+    margin: 0 auto 35px auto;
+    width: 54px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-state__title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 35px;
+    color: #161618;
+    margin: 0;
+}
+
+.success-state__text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 35px;
+    color: #808080;
+    margin: 0;
+}
+
+.success-state__bottom {
+    background: #F5F8F5;
+    padding: 44px 24px;
+    opacity: 0;
+    /* Для анімації */
+}
+
+.success-state__links {
+    max-width: 276px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.success-state__link {
+    height: 50px;
+    width: 100%;
+    background: #DAF8DE;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 14px;
+    gap: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all .3s ease;
+}
+
+.success-state__link:hover {
+    background-color: #c1ffc9;
+}
+
+.success-state__link-icon {
+    width: 32px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.success-state__link-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #161618;
+}
+
+/* --- Анімації появи --- */
+/* --- Початковий стан: приховуємо загальну прозорість з блоків --- */
+.success-state__top,
+.success-state__bottom {
+    opacity: 1;
+}
+
+/* Початковий стан для всіх елементів, які будуть анімуватись */
+.success-state__icon,
+.success-state__title,
+.success-state__text,
+.success-state__link {
+    opacity: 0;
+}
+
+/* --- Анімації появи по черзі --- */
+
+/* 1. Іконка */
+.success-state.is-active .success-state__icon {
+    animation: successSlideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.1s;
+}
+
+/* 2. Заголовок */
+.success-state.is-active .success-state__title {
+    animation: successSlideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+}
+
+/* 3. Текст */
+.success-state.is-active .success-state__text {
+    animation: successSlideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+/* 4. Перша кнопка */
+.success-state.is-active .success-state__link:nth-child(1) {
+    animation: successFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.45s;
+}
+
+/* 5. Друга кнопка */
+.success-state.is-active .success-state__link:nth-child(2) {
+    animation: successFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.55s;
+}
+
+/* 6. Третя кнопка (чат) */
+.success-state.is-active .success-state__link:nth-child(3) {
+    animation: successFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.65s;
+}
+
+/* Самі ключові кадри залишаються без змін */
+@keyframes successSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        /* Зробив виїзд трохи меншим для плавності */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes successFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+        /* Додав легкий рух знизу для кнопок */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

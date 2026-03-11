@@ -158,6 +158,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const successMsg = document.getElementById('form-success-msg');
             if (successMsg) successMsg.style.display = 'none';
+
+            // НОВЕ: Приховуємо екран подяки і повертаємо відображення форми
+            const successState = document.getElementById('success-state');
+            if (successState) {
+                successState.style.display = 'none';
+                successState.classList.remove('is-active');
+            }
+            form.style.display = 'block';
         };
 
         if (resetBtn) resetBtn.addEventListener('click', resetForm);
@@ -308,20 +316,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch('https://jsonplaceholder.typicode.com/posts', {
                     method: 'POST',
                     body: JSON.stringify(payloadArray),
-                    headers: { 'Content-type': 'application/json; charset=UTF-8' }
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
                 })
                     .then(response => response.json())
                     .then(json => {
                         submitBtn.innerHTML = originalBtnText;
                         submitBtn.disabled = false;
-                        successMsg.innerHTML = `Application submitted successfully!<br><span style="font-size: 12px; color: #666;">Server Response ID: ${json.id}</span>`;
-                        successMsg.style.display = 'block';
 
-                        setTimeout(() => {
-                            resetForm();
-                        }, 3000);
+                        // Спочатку очищуємо всі поля
+                        resetForm();
+
+                        // Приховуємо саму форму
+                        form.style.display = 'none';
+
+                        // Показуємо скрін подяки
+                        const successState = document.getElementById('success-state');
+                        if (successState) {
+                            successState.style.display = 'block';
+
+                            // Невелика затримка (10ms) для того, щоб DOM відмалював елемент 
+                            // до додавання класу, що запустить CSS анімацію
+                            setTimeout(() => {
+                                successState.classList.add('is-active');
+                            }, 10);
+                        }
                     })
                     .catch(err => {
+                        // Старий catch залишається без змін
                         submitBtn.innerHTML = originalBtnText;
                         submitBtn.disabled = false;
                         successMsg.innerHTML = 'Error submitting application. Try again.';
