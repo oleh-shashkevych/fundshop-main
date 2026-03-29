@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundshop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header__container">
+
+            <div class="header__logo">
+                <img src="img/logo.svg" alt="Fundshop logo">
+            </div>
+
+            <div class="header__nav" id="header-nav">
+                <a href="#" class="btn-home">
+                    <div class="btn-home__icon">
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.89607 18.3217L5.18166 6.36075L20.5026 19.2165" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M5.17921 6.36283L17.2697 5.66516" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <span class="btn-home__text">Return<br>to Home</span>
+                </a>
+
+                <a href="tel:8776289494" class="header-phone">
+                    <div class="header-phone__icon">
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.69784 17.2323C15.0181 23.4586 21.737 22.2105 21.737 22.2105L23.1317 15.9699L16.5246 13.9069L14.1246 17.175C14.1246 17.175 12.0711 16.5122 9.76849 14.4463C7.76658 12.4808 6.66968 10.326 6.66968 10.326L9.71407 7.65188L7.09355 1.23047L1.00763 3.15574C1.00763 3.15574 0.506435 10.6244 7.62911 17.1721C7.65202 17.1922 7.67493 17.2123 7.69784 17.2323Z"
+                                stroke="currentColor" stroke-width="2" stroke-miterlimit="10" />
+                        </svg>
+                    </div>
+                    <div class="header-phone__content">
+                        <span class="header-phone__number">877-628-9494</span>
+                        <span class="header-phone__text">Call us today for a free quote!</span>
+                    </div>
+                </a>
+            </div>
+
+            <button class="burger-btn" id="burger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+        <div class="layout-container">
+
+            <div class="panel-left">
+                <div class="progress-bar">
+                    <div class="progress-bar__fill" style="width: 80%;"></div>
+                </div>
+
+                <div class="panel-left__body">
+
+                    <div class="step-header">
+                        <h1 class="step-title">Connect a business account</h1>
+                        <p class="step-desc">For the final decision, we need to analyze your business's cash flow over
+                            the past few months. It's safe and takes less than 2 minutes.</p>
+                    </div>
+
+                    <div class="step-action">
+                        <button type="button" class="btn-plaid">
+                            <div class="btn-plaid__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.8896 0C12.4194 3.35816e-06 12.9405 0.133473 13.4053 0.387695L22.7627 5.50586C23.0702 5.67411 23.3271 5.92215 23.5059 6.22363C23.6846 6.5251 23.7792 6.86928 23.7793 7.21973V8.4209C23.7792 8.81133 23.6237 9.18582 23.3477 9.46191C23.0715 9.73797 22.6971 9.89355 22.3066 9.89355H20.7686V18.6318H21.8252C22.9043 18.632 23.7791 19.5069 23.7793 20.5859V21.79C23.7793 22.8693 22.9044 23.745 21.8252 23.7451H1.9541C0.874855 23.745 0 22.8693 0 21.79V20.5859C0.000240957 19.5069 0.875003 18.6319 1.9541 18.6318H3.01074V9.89355H1.47266C1.0822 9.89355 0.70778 9.73796 0.431641 9.46191C0.155554 9.18582 8.17008e-05 8.81134 0 8.4209V7.21973C0.000124403 6.86928 0.0947317 6.52509 0.273438 6.22363C0.45221 5.92217 0.709142 5.67411 1.0166 5.50586L10.373 0.387695C10.8379 0.133346 11.3598 1.50001e-06 11.8896 0ZM1.9541 20.1318C1.70346 20.1319 1.50024 20.3353 1.5 20.5859V21.79C1.5 22.0409 1.70331 22.245 1.9541 22.2451H21.8252C22.076 22.245 22.2793 22.0409 22.2793 21.79V20.5859C22.2791 20.3353 22.0758 20.132 21.8252 20.1318H20.1328C20.0955 20.1375 20.0574 20.1416 20.0186 20.1416C19.9797 20.1416 19.9416 20.1375 19.9043 20.1318H15.0146C14.9774 20.1375 14.9393 20.1416 14.9004 20.1416C14.8615 20.1416 14.8234 20.1375 14.7861 20.1318H8.99316C8.95587 20.1375 8.9178 20.1416 8.87891 20.1416C8.84001 20.1416 8.80195 20.1375 8.76465 20.1318H3.875C3.8377 20.1375 3.79963 20.1416 3.76074 20.1416C3.72185 20.1416 3.68378 20.1375 3.64648 20.1318H1.9541ZM4.51074 18.6318H8.12891V9.89355H4.51074V18.6318ZM9.62891 18.6318H14.1504V9.89355H9.62891V18.6318ZM15.6504 18.6318H19.2686V9.89355H15.6504V18.6318ZM11.8896 1.5C11.6115 1.5 11.3378 1.56969 11.0938 1.70312L1.73633 6.82227C1.66502 6.86133 1.605 6.91838 1.56348 6.98828C1.52197 7.05835 1.50002 7.13926 1.5 7.2207V8.39355H22.2793V7.2207L22.2754 7.15918C22.2672 7.0992 22.2469 7.04071 22.2158 6.98828C22.1743 6.91838 22.1143 6.86133 22.043 6.82227L12.6855 1.70312C12.4415 1.56969 12.1678 1.5 11.8896 1.5Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <span class="btn-plaid__text">Connect account through Plaid</span>
+                            <div class="btn-plaid__chevron">
+                                <svg width="9" height="17" viewBox="0 0 9 17" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L8 8.5L1 16" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                        </button>
+
+                        <div class="divider">
+                            <span class="divider__line"></span>
+                            <span class="divider__text">OR</span>
+                            <span class="divider__line"></span>
+                        </div>
+
+                        <div class="trouble-text" id="trouble-text">
+                            Trouble connecting Plaid? Please submit your last 4 months of Business Checking
+                            Statements to <a href="mailto:submissions@gofundshop.com">submissions@gofundshop.com</a> or
+                            <button type="button" class="btn-link" id="btn-upload-statements">upload statements through
+                                our secured link</button>
+                            for expedited processing.
+                        </div>
+
+                        <div class="upload-section" id="upload-section">
+                            <div class="upload-dropzone" id="upload-dropzone">
+                                <div class="upload-dropzone__left">
+                                    <div class="upload-dropzone__icon-wrapper">
+                                        <svg width="19" height="25" viewBox="0 0 19 25" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M19 24.3237H0V0H10.7372V8.25663C10.8714 8.25663 19 8.26437 19 8.26437V24.3237ZM12.2866 3.80992V1.09696L17.9046 6.715H12.2866V3.80992ZM8.69415 14.2249L7.20999 15.709C6.90761 16.0114 6.41789 16.0125 6.11441 15.709C5.81204 15.4066 5.81204 14.9158 6.11441 14.6134L9.46906 11.2588L12.8237 14.6134C13.1261 14.9158 13.1261 15.4066 12.8237 15.709C12.5213 16.0114 12.0305 16.0114 11.7281 15.709L10.2435 14.2244V19.2166C10.2435 19.6442 9.89801 19.9913 9.46884 19.9913C9.04121 19.9913 8.69415 19.6442 8.69415 19.2166V14.2249Z"
+                                                fill="#848586" fill-opacity="0.7" />
+                                        </svg>
+                                    </div>
+                                    <div class="upload-dropzone__text">
+                                        <div class="upload-dropzone__title">Download PDF statements</div>
+                                        <div class="upload-dropzone__subtitle">In the last 6 months (max. 10 MB)</div>
+                                    </div>
+                                </div>
+                                <div class="upload-dropzone__right">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 17V1M17 9H1" stroke="#848586" stroke-opacity="0.5" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <input type="file" id="file-input" multiple accept="application/pdf" hidden>
+                            </div>
+
+                            <div class="uploaded-files-list" id="uploaded-files-list"></div>
+
+                            <div class="validation-errors" id="validation-errors"></div>
+                        </div>
+
+                        <div class="security-badges">
+                            <div class="badge">
+                                <svg class="badge__icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9 0C13.9705 3.22144e-08 18 4.02955 18 9C18 13.9705 13.9705 18 9 18C4.02955 18 3.22154e-08 13.9705 0 9C0 4.02955 4.02955 0 9 0ZM9 1.63672C8.03299 1.63672 7.07504 1.82721 6.18164 2.19727C5.28844 2.56732 4.47662 3.10932 3.79297 3.79297C3.10932 4.47662 2.56732 5.28844 2.19727 6.18164C1.82721 7.07504 1.63672 8.03299 1.63672 9C1.63672 9.96701 1.82721 10.925 2.19727 11.8184C2.56732 12.7116 3.10932 13.5234 3.79297 14.207C4.47662 14.8907 5.28844 15.4327 6.18164 15.8027C7.07504 16.1728 8.03299 16.3633 9 16.3633C10.953 16.3633 12.8261 15.588 14.207 14.207C15.588 12.8261 16.3633 10.953 16.3633 9C16.3633 7.04704 15.588 5.17392 14.207 3.79297C12.8261 2.41202 10.953 1.63672 9 1.63672ZM13.3477 6.74316L7.5625 12.5293L4.09082 9.05762L5.24805 7.90039L7.5625 10.2139L12.1904 5.58594L13.3477 6.74316Z"
+                                        fill="#159C2A" />
+                                </svg>
+                                <span class="badge__text">Read-only access</span>
+                            </div>
+                            <div class="badge__dot"></div>
+                            <div class="badge">
+                                <svg class="badge__icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9 0C13.9705 3.22144e-08 18 4.02955 18 9C18 13.9705 13.9705 18 9 18C4.02955 18 3.22154e-08 13.9705 0 9C0 4.02955 4.02955 0 9 0ZM9 1.63672C8.03299 1.63672 7.07504 1.82721 6.18164 2.19727C5.28844 2.56732 4.47662 3.10932 3.79297 3.79297C3.10932 4.47662 2.56732 5.28844 2.19727 6.18164C1.82721 7.07504 1.63672 8.03299 1.63672 9C1.63672 9.96701 1.82721 10.925 2.19727 11.8184C2.56732 12.7116 3.10932 13.5234 3.79297 14.207C4.47662 14.8907 5.28844 15.4327 6.18164 15.8027C7.07504 16.1728 8.03299 16.3633 9 16.3633C10.953 16.3633 12.8261 15.588 14.207 14.207C15.588 12.8261 16.3633 10.953 16.3633 9C16.3633 7.04704 15.588 5.17392 14.207 3.79297C12.8261 2.41202 10.953 1.63672 9 1.63672ZM13.3477 6.74316L7.5625 12.5293L4.09082 9.05762L5.24805 7.90039L7.5625 10.2139L12.1904 5.58594L13.3477 6.74316Z"
+                                        fill="#159C2A" />
+                                </svg>
+                                <span class="badge__text">AES-256 encryption</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-footer">
+                        <div class="step-counter">STEP: 9/9</div>
+                        <div class="step-controls">
+                            <a href="#" class="btn-back">
+                                <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.20131 1L1 7.44845H17" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M1.00395 7.44922L8.05469 14.0941" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </a>
+                            <button type="button" class="btn-next">
+                                NEXT
+                                <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.79869 1L17 7.44845H1" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16.996 7.44922L9.94531 14.0941" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-right">
+                <div class="right-top-group">
+
+                    <div class="safety-block">
+                        <div class="safety-block__header">
+                            <svg width="21" height="23" viewBox="0 0 21 23" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.25 3.878L10.2545 1.25L19.25 3.878V9.267C19.2496 12.0288 18.3804 14.7204 16.7654 16.9608C15.1504 19.2012 12.8716 20.8767 10.2515 21.75C7.63048 20.877 5.35065 19.2014 3.73505 16.9605C2.11946 14.7196 1.25004 12.0271 1.25 9.2645V3.878Z"
+                                    stroke="#159C2A" stroke-width="2.5" stroke-linejoin="round" />
+                                <path d="M5.75 10.75L9.25 14.25L15.25 8.25" stroke="#159C2A" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span class="safety-block__title">Safety guarantee</span>
+                        </div>
+                        <ul class="safety-list">
+                            <li class="safety-list__item">
+                                <svg width="12" height="9" viewBox="0 0 12 9" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.25 3.75L4.75 7.25L10.75 1.25" stroke="#159C2A" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span>We do not store passwords and logins from your bank.</span>
+                            </li>
+                            <li class="safety-list__item">
+                                <svg width="12" height="9" viewBox="0 0 12 9" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.25 3.75L4.75 7.25L10.75 1.25" stroke="#159C2A" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span>Access is in "Only view transaction history" mode.</span>
+                            </li>
+                            <li class="safety-list__item">
+                                <svg width="12" height="9" viewBox="0 0 12 9" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.25 3.75L4.75 7.25L10.75 1.25" stroke="#159C2A" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span>The connection is certified according to the SOC2 standard.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="ratings-block">
+                        <h3 class="ratings-block__title">With Fundshop, your information is always secure</h3>
+
+                        <div class="ratings-container">
+                            <a href="#" class="rating-google">
+                                <span class="rating-google__logo">
+                                    <img src="img/google-logo.svg" alt="Google logo">
+                                </span>
+                                <span class="rating-google__content">
+                                    <span class="rating-google__header">Google Rating</span>
+                                    <span class="rating-google__row">
+                                        <span class="rating-google__score">4.9</span>
+                                        <span class="rating-google__stars">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1948_1941)">
+                                                    <path
+                                                        d="M5.42496 4.82996L1.22751 5.43852L1.15316 5.45366C1.04062 5.48353 0.938024 5.54274 0.85585 5.62524C0.773675 5.70774 0.714867 5.81056 0.685432 5.92322C0.655996 6.03588 0.656987 6.15433 0.688304 6.26648C0.71962 6.37863 0.78014 6.48046 0.863684 6.56157L3.90454 9.5215L3.18742 13.7025L3.17886 13.7749C3.17197 13.8913 3.19614 14.0074 3.2489 14.1114C3.30165 14.2154 3.38109 14.3035 3.47909 14.3667C3.57709 14.4299 3.69012 14.4659 3.80661 14.471C3.92309 14.4762 4.03886 14.4503 4.14204 14.3959L7.89607 12.4222L11.6415 14.3959L11.7073 14.4262C11.8159 14.469 11.9339 14.4821 12.0493 14.4642C12.1646 14.4463 12.2731 14.3981 12.3637 14.3244C12.4542 14.2507 12.5235 14.1543 12.5645 14.045C12.6055 13.9358 12.6166 13.8175 12.5968 13.7025L11.879 9.5215L14.9212 6.56092L14.9725 6.50499C15.0458 6.41471 15.0939 6.3066 15.1118 6.19169C15.1297 6.07679 15.1169 5.95918 15.0746 5.85086C15.0322 5.74253 14.962 5.64737 14.8709 5.57505C14.7798 5.50273 14.6712 5.45585 14.5561 5.43918L10.3586 4.82996L8.48226 1.02725C8.42797 0.917072 8.34392 0.824294 8.23962 0.759417C8.13532 0.694541 8.01495 0.660156 7.89212 0.660156C7.76929 0.660156 7.64892 0.694541 7.54462 0.759417C7.44032 0.824294 7.35627 0.917072 7.30198 1.02725L5.42496 4.82996Z"
+                                                        fill="#FFB300" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1948_1941">
+                                                        <rect width="15.7898" height="15.7898" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1948_1941)">
+                                                    <path
+                                                        d="M5.42496 4.82996L1.22751 5.43852L1.15316 5.45366C1.04062 5.48353 0.938024 5.54274 0.85585 5.62524C0.773675 5.70774 0.714867 5.81056 0.685432 5.92322C0.655996 6.03588 0.656987 6.15433 0.688304 6.26648C0.71962 6.37863 0.78014 6.48046 0.863684 6.56157L3.90454 9.5215L3.18742 13.7025L3.17886 13.7749C3.17197 13.8913 3.19614 14.0074 3.2489 14.1114C3.30165 14.2154 3.38109 14.3035 3.47909 14.3667C3.57709 14.4299 3.69012 14.4659 3.80661 14.471C3.92309 14.4762 4.03886 14.4503 4.14204 14.3959L7.89607 12.4222L11.6415 14.3959L11.7073 14.4262C11.8159 14.469 11.9339 14.4821 12.0493 14.4642C12.1646 14.4463 12.2731 14.3981 12.3637 14.3244C12.4542 14.2507 12.5235 14.1543 12.5645 14.045C12.6055 13.9358 12.6166 13.8175 12.5968 13.7025L11.879 9.5215L14.9212 6.56092L14.9725 6.50499C15.0458 6.41471 15.0939 6.3066 15.1118 6.19169C15.1297 6.07679 15.1169 5.95918 15.0746 5.85086C15.0322 5.74253 14.962 5.64737 14.8709 5.57505C14.7798 5.50273 14.6712 5.45585 14.5561 5.43918L10.3586 4.82996L8.48226 1.02725C8.42797 0.917072 8.34392 0.824294 8.23962 0.759417C8.13532 0.694541 8.01495 0.660156 7.89212 0.660156C7.76929 0.660156 7.64892 0.694541 7.54462 0.759417C7.44032 0.824294 7.35627 0.917072 7.30198 1.02725L5.42496 4.82996Z"
+                                                        fill="#FFB300" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1948_1941">
+                                                        <rect width="15.7898" height="15.7898" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1948_1941)">
+                                                    <path
+                                                        d="M5.42496 4.82996L1.22751 5.43852L1.15316 5.45366C1.04062 5.48353 0.938024 5.54274 0.85585 5.62524C0.773675 5.70774 0.714867 5.81056 0.685432 5.92322C0.655996 6.03588 0.656987 6.15433 0.688304 6.26648C0.71962 6.37863 0.78014 6.48046 0.863684 6.56157L3.90454 9.5215L3.18742 13.7025L3.17886 13.7749C3.17197 13.8913 3.19614 14.0074 3.2489 14.1114C3.30165 14.2154 3.38109 14.3035 3.47909 14.3667C3.57709 14.4299 3.69012 14.4659 3.80661 14.471C3.92309 14.4762 4.03886 14.4503 4.14204 14.3959L7.89607 12.4222L11.6415 14.3959L11.7073 14.4262C11.8159 14.469 11.9339 14.4821 12.0493 14.4642C12.1646 14.4463 12.2731 14.3981 12.3637 14.3244C12.4542 14.2507 12.5235 14.1543 12.5645 14.045C12.6055 13.9358 12.6166 13.8175 12.5968 13.7025L11.879 9.5215L14.9212 6.56092L14.9725 6.50499C15.0458 6.41471 15.0939 6.3066 15.1118 6.19169C15.1297 6.07679 15.1169 5.95918 15.0746 5.85086C15.0322 5.74253 14.962 5.64737 14.8709 5.57505C14.7798 5.50273 14.6712 5.45585 14.5561 5.43918L10.3586 4.82996L8.48226 1.02725C8.42797 0.917072 8.34392 0.824294 8.23962 0.759417C8.13532 0.694541 8.01495 0.660156 7.89212 0.660156C7.76929 0.660156 7.64892 0.694541 7.54462 0.759417C7.44032 0.824294 7.35627 0.917072 7.30198 1.02725L5.42496 4.82996Z"
+                                                        fill="#FFB300" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1948_1941">
+                                                        <rect width="15.7898" height="15.7898" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1948_1941)">
+                                                    <path
+                                                        d="M5.42496 4.82996L1.22751 5.43852L1.15316 5.45366C1.04062 5.48353 0.938024 5.54274 0.85585 5.62524C0.773675 5.70774 0.714867 5.81056 0.685432 5.92322C0.655996 6.03588 0.656987 6.15433 0.688304 6.26648C0.71962 6.37863 0.78014 6.48046 0.863684 6.56157L3.90454 9.5215L3.18742 13.7025L3.17886 13.7749C3.17197 13.8913 3.19614 14.0074 3.2489 14.1114C3.30165 14.2154 3.38109 14.3035 3.47909 14.3667C3.57709 14.4299 3.69012 14.4659 3.80661 14.471C3.92309 14.4762 4.03886 14.4503 4.14204 14.3959L7.89607 12.4222L11.6415 14.3959L11.7073 14.4262C11.8159 14.469 11.9339 14.4821 12.0493 14.4642C12.1646 14.4463 12.2731 14.3981 12.3637 14.3244C12.4542 14.2507 12.5235 14.1543 12.5645 14.045C12.6055 13.9358 12.6166 13.8175 12.5968 13.7025L11.879 9.5215L14.9212 6.56092L14.9725 6.50499C15.0458 6.41471 15.0939 6.3066 15.1118 6.19169C15.1297 6.07679 15.1169 5.95918 15.0746 5.85086C15.0322 5.74253 14.962 5.64737 14.8709 5.57505C14.7798 5.50273 14.6712 5.45585 14.5561 5.43918L10.3586 4.82996L8.48226 1.02725C8.42797 0.917072 8.34392 0.824294 8.23962 0.759417C8.13532 0.694541 8.01495 0.660156 7.89212 0.660156C7.76929 0.660156 7.64892 0.694541 7.54462 0.759417C7.44032 0.824294 7.35627 0.917072 7.30198 1.02725L5.42496 4.82996Z"
+                                                        fill="#FFB300" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1948_1941">
+                                                        <rect width="15.7898" height="15.7898" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1948_1941)">
+                                                    <path
+                                                        d="M5.42496 4.82996L1.22751 5.43852L1.15316 5.45366C1.04062 5.48353 0.938024 5.54274 0.85585 5.62524C0.773675 5.70774 0.714867 5.81056 0.685432 5.92322C0.655996 6.03588 0.656987 6.15433 0.688304 6.26648C0.71962 6.37863 0.78014 6.48046 0.863684 6.56157L3.90454 9.5215L3.18742 13.7025L3.17886 13.7749C3.17197 13.8913 3.19614 14.0074 3.2489 14.1114C3.30165 14.2154 3.38109 14.3035 3.47909 14.3667C3.57709 14.4299 3.69012 14.4659 3.80661 14.471C3.92309 14.4762 4.03886 14.4503 4.14204 14.3959L7.89607 12.4222L11.6415 14.3959L11.7073 14.4262C11.8159 14.469 11.9339 14.4821 12.0493 14.4642C12.1646 14.4463 12.2731 14.3981 12.3637 14.3244C12.4542 14.2507 12.5235 14.1543 12.5645 14.045C12.6055 13.9358 12.6166 13.8175 12.5968 13.7025L11.879 9.5215L14.9212 6.56092L14.9725 6.50499C15.0458 6.41471 15.0939 6.3066 15.1118 6.19169C15.1297 6.07679 15.1169 5.95918 15.0746 5.85086C15.0322 5.74253 14.962 5.64737 14.8709 5.57505C14.7798 5.50273 14.6712 5.45585 14.5561 5.43918L10.3586 4.82996L8.48226 1.02725C8.42797 0.917072 8.34392 0.824294 8.23962 0.759417C8.13532 0.694541 8.01495 0.660156 7.89212 0.660156C7.76929 0.660156 7.64892 0.694541 7.54462 0.759417C7.44032 0.824294 7.35627 0.917072 7.30198 1.02725L5.42496 4.82996Z"
+                                                        fill="#FFB300" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1948_1941">
+                                                        <rect width="15.7898" height="15.7898" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <span class="rating-google__text">See all our reviews</span>
+                                </span>
+                            </a>
+
+                            <a href="#" class="rating-trustpilot">
+                                <span class="rating-trustpilot__left">
+                                    <img src="img/trustpilot.svg" alt="Trustpilot logo">
+                                </span>
+                                <span class="rating-trustpilot__right">
+                                    1.1K reviews
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="right-bottom-group">
+
+                    <div class="faq-section-header">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 16H11V14H9V16ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 4C8.93913 4 7.92172 4.42143 7.17157 5.17157C6.42143 5.92172 6 6.93913 6 8H8C8 7.46957 8.21071 6.96086 8.58579 6.58579C8.96086 6.21071 9.46957 6 10 6C10.5304 6 11.0391 6.21071 11.4142 6.58579C11.7893 6.96086 12 7.46957 12 8C12 10 9 9.75 9 13H11C11 10.75 14 10.5 14 8C14 6.93913 13.5786 5.92172 12.8284 5.17157C12.0783 4.42143 11.0609 4 10 4Z"
+                                fill="#159C2A" />
+                        </svg>
+                        <span>Bank Linking FAQs</span>
+                    </div>
+
+                    <div class="faq-accordion">
+
+                        <div class="faq-item active">
+                            <button class="faq-question">
+                                <span>How does the bank linking process work?</span>
+                                <svg class="faq-chevron" width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.75 0.75L6.75 6.75L12.75 0.75" stroke="#161618" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    Fundshop, LLC securely connects to your bank account using Plaid: a secure, private
+                                    service, with the same 256-bit encryption banks use.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How do I know my information is safe?</span>
+                                <svg class="faq-chevron" width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.75 0.75L6.75 6.75L12.75 0.75" stroke="#161618" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    Your connection is read-only and uses bank-level security to ensure your data
+                                    remains protected at all times.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>What if I have more than one business banking account?</span>
+                                <svg class="faq-chevron" width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.75 0.75L6.75 6.75L12.75 0.75" stroke="#161618" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="faq-answer-wrapper">
+                                <div class="faq-answer">
+                                    You can link multiple accounts during the Plaid connection process or upload
+                                    statements manually for additional accounts.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="help-block">
+                        <h4 class="help-block__title">Need help?</h4>
+                        <p class="help-block__text">If you can't find your bank or have any difficulties, contact a
+                            manager.</p>
+                        <a href="#" class="help-block__link">
+                            Write to support
+                            <svg width="12" height="10" viewBox="0 0 12 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.24918 0.75L10.75 4.7803H0.75" stroke="#159C2A" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M10.7505 4.78125L6.34375 8.9343" stroke="#159C2A" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
