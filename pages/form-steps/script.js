@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- 1. FAQ Accordion Logic ---
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
@@ -13,16 +13,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 2. Upload Files Logic ---
+    // --- 2. Upload Files & Plaid Logic ---
     const btnOpenUpload = document.getElementById('btn-upload-statements');
     const troubleText = document.getElementById('trouble-text');
     const uploadSection = document.getElementById('upload-section');
-    
+    const btnPlaid = document.getElementById('btn-plaid');
+    const uploadSubtitle = document.getElementById('upload-subtitle');
+
     uploadSection.style.display = 'none';
+
+    let uploadedFiles = [];
+    const MAX_FILES = 4;
+    const MAX_TOTAL_SIZE_MB = 25;
+    const MAX_FILE_SIZE_MB = 25;
+
+    if (uploadSubtitle) {
+        uploadSubtitle.innerText = `In the last 6 months (max. ${MAX_FILE_SIZE_MB} MB, up to ${MAX_FILES} files)`;
+    }
 
     btnOpenUpload.addEventListener('click', () => {
         troubleText.style.display = 'none';
         uploadSection.style.display = 'flex';
+    });
+
+    btnPlaid.addEventListener('click', () => {
+        uploadSection.style.display = 'none';
+        troubleText.style.display = 'block';
+        uploadedFiles = [];
+        errorsContainer.innerHTML = '';
+        fileInput.value = '';
+        renderFiles();
     });
 
     const dropzone = document.getElementById('upload-dropzone');
@@ -30,11 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filesListContainer = document.getElementById('uploaded-files-list');
     const errorsContainer = document.getElementById('validation-errors');
     const btnNext = document.querySelector('.btn-next');
-
-    let uploadedFiles = [];
-    const MAX_FILES = 4;
-    const MAX_TOTAL_SIZE_MB = 25;
-    const MAX_FILE_SIZE_MB = 25;
+    const btnBack = document.querySelector('.btn-back');
 
     dropzone.addEventListener('click', () => {
         fileInput.click();
@@ -42,24 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fileInput.addEventListener('change', (e) => {
         handleFiles(e.target.files);
-        fileInput.value = ''; 
+        fileInput.value = '';
     });
 
     dropzone.addEventListener('dragover', (e) => {
         e.preventDefault();
-        dropzone.style.borderColor = '#159C2A';
+        dropzone.classList.add('dragover');
     });
     dropzone.addEventListener('dragleave', () => {
-        dropzone.style.borderColor = '#D2D3D3';
+        dropzone.classList.remove('dragover');
     });
     dropzone.addEventListener('drop', (e) => {
         e.preventDefault();
-        dropzone.style.borderColor = '#D2D3D3';
+        dropzone.classList.remove('dragover');
         handleFiles(e.dataTransfer.files);
     });
 
     function handleFiles(files) {
-        errorsContainer.innerHTML = ''; 
+        errorsContainer.innerHTML = '';
         let newFiles = Array.from(files);
         let errorMessages = [];
 
@@ -80,13 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (uploadedFiles.length > MAX_FILES) {
             uploadedFiles = uploadedFiles.slice(0, MAX_FILES);
-            errorMessages.push(`You can only upload up to 4 files.`);
+            errorMessages.push(`You can only upload up to ${MAX_FILES} files.`);
         }
 
         const totalSize = uploadedFiles.reduce((sum, file) => sum + file.size, 0);
         if (totalSize / (1024 * 1024) > MAX_TOTAL_SIZE_MB) {
             errorMessages.push(`Total size exceeds 25MB.`);
-            uploadedFiles.pop(); 
+            uploadedFiles.pop();
         }
 
         if (errorMessages.length > 0) {
@@ -101,10 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         uploadedFiles.forEach((file, index) => {
             const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-            
+
             const fileEl = document.createElement('div');
             fileEl.className = 'file-item';
-            
+
             fileEl.innerHTML = `
                 <div class="upload-dropzone__left">
                     <div class="file-item__icon-wrapper">
@@ -131,27 +147,52 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', (e) => {
                 const index = parseInt(e.currentTarget.getAttribute('data-index'));
                 uploadedFiles.splice(index, 1);
-                errorsContainer.innerHTML = ''; 
+                errorsContainer.innerHTML = '';
                 renderFiles();
             });
         });
     }
 
-    // --- 3. Next Button Logic ---
-    btnNext.addEventListener('click', (e) => {
-        if (uploadSection.style.display !== 'none') {
-            e.preventDefault(); 
-            
-            if (uploadedFiles.length === 0) {
-                errorsContainer.innerHTML = 'Please select at least 1 file to continue.';
-                return;
-            }
+    // --- 3. Next Button Logic (Mock Backend) ---
+    btnNext.addEventListener('click', async (e) => {
+        e.preventDefault();
 
-            errorsContainer.innerHTML = '';
-            
-            const fileNames = uploadedFiles.map(f => f.name);
-            console.log('--- READY TO SEND TO BACKEND ---');
-            console.log('Selected files:', fileNames);
+        if (uploadedFiles.length === 0) {
+            errorsContainer.innerHTML = 'Connect your bank account or select requirement documents.';
+            return;
+        }
+
+        errorsContainer.innerHTML = '';
+
+        btnNext.disabled = true;
+        btnNext.style.opacity = '0.5';
+        btnNext.style.cursor = 'not-allowed';
+        btnBack.style.pointerEvents = 'none';
+        btnBack.style.opacity = '0.5';
+
+        try {
+            await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    Math.random() > 0.1 ? resolve() : reject(new Error('Server error during upload. Please try again.'));
+                }, 2000);
+            });
+
+            console.log('--- SUCCESS: DATA SENT TO BACKEND ---');
+            console.log('Selected files:', uploadedFiles.map(f => f.name));
+
+            uploadedFiles = [];
+            fileInput.value = '';
+            renderFiles();
+
+        } catch (error) {
+            console.error('--- ERROR: FAILED TO SEND DATA TO BACKEND ---', error);
+            errorsContainer.innerHTML = error.message;
+        } finally {
+            btnNext.disabled = false;
+            btnNext.style.opacity = '1';
+            btnNext.style.cursor = 'pointer';
+            btnBack.style.pointerEvents = 'auto';
+            btnBack.style.opacity = '1';
         }
     });
 
@@ -160,7 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerNav = document.getElementById('header-nav');
 
     burgerBtn.addEventListener('click', () => {
-        burgerBtn.classList.toggle('active');
+        const isActive = burgerBtn.classList.toggle('active');
         headerNav.classList.toggle('active');
+
+        document.body.style.overflow = isActive ? 'hidden' : '';
     });
 });

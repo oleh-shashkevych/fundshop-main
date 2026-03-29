@@ -99,7 +99,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
 }
 
 .header__logo {
@@ -110,7 +109,7 @@ a {
     display: flex;
     align-items: center;
     gap: 14px;
-    transition: var(--transition);
+    transition: opacity 0.3s ease;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -143,7 +142,7 @@ a {
     display: flex;
     align-items: center;
     gap: 14px;
-    transition: var(--transition);
+    transition: opacity 0.3s ease;
 }
 
 .header-phone:hover {
@@ -808,7 +807,13 @@ a {
 
 .upload-dropzone:hover {
     border-color: var(--green);
-    background: rgba(21, 156, 42, 0.02);
+    background: rgba(21, 156, 42, 0.08);
+}
+
+.upload-dropzone.dragover {
+    border-color: var(--green-dark);
+    background: rgba(21, 156, 42, 0.15);
+    border-style: solid;
 }
 
 .upload-dropzone__left {
@@ -881,6 +886,7 @@ a {
     font-size: 15px;
     line-height: 100%;
     color: var(--black);
+    word-break: break-word;
 }
 
 .file-item__subtitle {
@@ -898,6 +904,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 5px;
+    flex-shrink: 0;
 }
 
 .btn-delete-file:hover {
@@ -906,9 +913,9 @@ a {
 
 /* --- Validation Errors --- */
 .validation-errors {
-    margin-top: 14px;
+    margin-top: 16px;
     color: #D81015;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
     text-align: center;
 }
@@ -931,9 +938,11 @@ a {
 
     .header__nav {
         position: absolute;
-        top: 100%;
+        top: 121px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 121px);
+        overflow-y: auto;
         background: var(--pure-white);
         flex-direction: column;
         padding: 40px 24px;
@@ -942,14 +951,11 @@ a {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-10px);
-        transition: var(--transition);
     }
 
     .header__nav.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
     }
 
     .btn-home {
@@ -976,6 +982,11 @@ a {
 @media (max-width: 768px) {
     .header {
         height: 66px;
+    }
+
+    .header__nav {
+        height: calc(100vh - 67px);
+        top: 67px;
     }
 
     .header__container {
@@ -1046,19 +1057,20 @@ a {
 
     .upload-dropzone,
     .file-item {
-        padding: 14px;
-        flex-direction: column;
-        position: relative;
+        padding: 16px 14px;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .upload-dropzone__left {
+        flex-direction: row;
+        text-align: left;
+        gap: 14px;
+        align-items: center;
     }
 
     .upload-dropzone__right {
         display: none;
-    }
-
-    .upload-dropzone__left {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
     }
 
     .upload-dropzone__icon-wrapper,
@@ -1067,9 +1079,7 @@ a {
     }
 
     .btn-delete-file {
-        position: absolute;
-        top: 14px;
-        right: 14px;
+        position: static;
     }
 
     .step-footer {

@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="step-action">
-                        <button type="button" class="btn-plaid">
+                        <button type="button" class="btn-plaid" id="btn-plaid">
                             <span class="btn-plaid__icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +122,8 @@
                                     </div>
                                     <div class="upload-dropzone__text">
                                         <div class="upload-dropzone__title">Download PDF statements</div>
-                                        <div class="upload-dropzone__subtitle">In the last 6 months (max. 10 MB)</div>
+                                        <div class="upload-dropzone__subtitle" id="upload-subtitle">In the last 6 months
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="upload-dropzone__right">
@@ -136,9 +137,9 @@
                             </div>
 
                             <div class="uploaded-files-list" id="uploaded-files-list"></div>
-
-                            <div class="validation-errors" id="validation-errors"></div>
                         </div>
+
+                        <div class="validation-errors" id="validation-errors"></div>
 
                         <div class="security-badges">
                             <div class="badge">
@@ -400,7 +401,7 @@
                     </div>
 
                     <div class="help-block">
-                        <h3 class="help-block__title">Need help?</h3>
+                        <h2 class="help-block__title">Need help?</h2>
                         <p class="help-block__text">If you can't find your bank or have any difficulties, contact a
                             manager.</p>
                         <a href="#" class="help-block__link">
